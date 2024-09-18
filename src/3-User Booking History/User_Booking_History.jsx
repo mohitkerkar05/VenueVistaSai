@@ -1,4 +1,5 @@
 import './User_Booking_History.css'
+import { NavLink } from 'react-router-dom';
 
 import image1 from '../images/venue-1.jpg'
 import image2 from '../images/venue-2.jpg'
@@ -13,10 +14,15 @@ function User_Booking_History(){
     <>
       <nav class="sidebar">
         <ul class="nav-list">
-          <li><a>Book Venue</a></li>
+          {/* <li><a>Book Venue</a></li>
           <li><a>Booking History</a></li>
           <li><a>Contact Admin</a></li>
-          <li><a class="my-details">My Details</a></li>
+          <li><a class="my-details">My Details</a></li> */}
+          <li><NavLink to="/home" className="nav-link">Book Venue</NavLink></li>
+          <li><NavLink to="/booking-history" className="nav-link">Booking History</NavLink></li>
+          <li><NavLink to="/contact-admin" className="nav-link">Contact Admin</NavLink></li>
+          <li><NavLink to="/my-details" className="nav-link">My Details</NavLink></li>
+          <li><NavLink to="/leave-review" className="nav-link">Leave a Review</NavLink></li>
         </ul>
       </nav>
 

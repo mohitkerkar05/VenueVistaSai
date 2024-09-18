@@ -1,4 +1,5 @@
 import './User_Personal_Details.css'
+import { NavLink } from 'react-router-dom';
 
 function User_Personal_Details(){
   return (
@@ -6,10 +7,16 @@ function User_Personal_Details(){
     <body className="user-personal-details-body">
       <nav className="sidebar">
         <ul className="nav-list">
-          <li><a>Book Venue</a></li>
+          {/* <li><a>Book Venue</a></li>
           <li><a>Booking History</a></li>
           <li><a>Contact Admin</a></li>
-          <li><a className="my-details">My Details</a></li>
+          <li><a className="my-details">My Details</a></li> */}
+
+          <li><NavLink to="/home" className="nav-link">Book Venue</NavLink></li>
+          <li><NavLink to="/booking-history" className="nav-link">Booking History</NavLink></li>
+          <li><NavLink to="/contact-admin" className="nav-link">Contact Admin</NavLink></li>
+          <li><NavLink to="/my-details" className="nav-link">My Details</NavLink></li>
+          <li><NavLink to="/leave-review" className="nav-link">Leave a Review</NavLink></li>
         </ul>
       </nav>
 

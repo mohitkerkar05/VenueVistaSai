@@ -1,4 +1,5 @@
 import './Initial_page.css'
+import { NavLink } from 'react-router-dom';
 
 import image1 from '../images/venue-1.jpg'
 import image2 from '../images/venue-2.jpg'
