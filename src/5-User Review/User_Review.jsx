@@ -1,5 +1,6 @@
 import './User_Review.css';
-import '../2-User Home Page/User_Home_Page.css';
+import Sidebar from '../6-sidebar/Sidebar';
+
 import { NavLink } from 'react-router-dom';
 
 import React, { useState } from 'react';
@@ -28,20 +29,7 @@ function User_Review() {
   return (
     <div className="user-review-body">
       {/* Sidebar */}
-      <nav className="sidebar">
-        <ul className="nav-list">
-          {/* <li><a href="#">Book Venue</a></li>
-          <li><a href="#">Booking History</a></li>
-          <li><a href="#">Contact Admin</a></li>
-          <li><a href="#" className="my-details">My Details</a></li>
-          <li><a href="#" className="my-details">Leave a Review</a></li> */}
-          <li><NavLink to="/home" className="nav-link">Book Venue</NavLink></li>
-          <li><NavLink to="/booking-history" className="nav-link">Booking History</NavLink></li>
-          <li><NavLink to="/contact-admin" className="nav-link">Contact Admin</NavLink></li>
-          <li><NavLink to="/my-details" className="nav-link">My Details</NavLink></li>
-          <li><NavLink to="/leave-review" className="nav-link">Leave a Review</NavLink></li>
-        </ul>
-      </nav>
+      <Sidebar></Sidebar>
 
       {/* Search Container */}
       <div className="search-container">

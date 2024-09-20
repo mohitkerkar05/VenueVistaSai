@@ -18,51 +18,6 @@ body {
   width: 100%;
 } 
 
-/* Navigation Panel Styling */
-.sidebar {
-  position: fixed; /* Fixed positioning to keep it on the left */
-  top: 0;
-  left: 0;
-  height: 100vh; /* Full height of the viewport */
-  width: 250px; /* Width of the sidebar */
-  background-color: #333; /* Dark background color */
-  color: white;
-  padding: 20px;
-  overflow: auto; /* Adds scroll if the content exceeds the height */
-}
-
-.sidebar .nav-list {
-  list-style: none; /* Remove bullet points */
-}
-
-.sidebar .nav-list li {
-  margin: 15px 0; /* Space between menu items */
-}
-
-.sidebar .nav-list a {
-  color: white; /* Link color */
-  text-decoration: none; /* Remove underline */
-  font-size: 18px;
-}
-
-.sidebar .nav-list a:hover {
-  text-decoration: underline; /* Underline on hover */
-}
-
-/* Main Content Styling */
-.content {
-  margin-left: 270px; /* Offset content by the width of the sidebar */
-  padding: 20px;
-}
-
-.content section {
-  margin-bottom: 40px; /* Space between sections */
-}
-
-.nav-list li a {
-  cursor: pointer;
-}
-
 .experimental-card-template {
   width: 50%;
   height: auto;
@@ -142,6 +97,7 @@ body {
 }
 
 .location{
+  margin-left:-35px;
   max-width:300px;
 }
 
@@ -197,6 +153,7 @@ body {
   width:50px;
   height:50px;
   border-radius:100%;
+  margin-left:5px;
 }
 
 .view-button {

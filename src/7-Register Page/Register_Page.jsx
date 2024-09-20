@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-import api from '../script/api'; // Import the API service
+// import api from '../script/api'; // Import the API service
 import './Register_Page.css'; // Import specific styles
 
 function RegisterPage({ onClose }) { // Add onClose prop to handle closing

@@ -1,41 +1,29 @@
 import './User_Personal_Details.css'
+import Sidebar from '../6-sidebar/Sidebar';
+
 import { NavLink } from 'react-router-dom';
+
+import image from '../6-sidebar/Icons/contactadmin.png'
 
 function User_Personal_Details(){
   return (
     <>
     <body className="user-personal-details-body">
-      <nav className="sidebar">
-        <ul className="nav-list">
-          {/* <li><a>Book Venue</a></li>
-          <li><a>Booking History</a></li>
-          <li><a>Contact Admin</a></li>
-          <li><a className="my-details">My Details</a></li> */}
-
-          <li><NavLink to="/home" className="nav-link">Book Venue</NavLink></li>
-          <li><NavLink to="/booking-history" className="nav-link">Booking History</NavLink></li>
-          <li><NavLink to="/contact-admin" className="nav-link">Contact Admin</NavLink></li>
-          <li><NavLink to="/my-details" className="nav-link">My Details</NavLink></li>
-          <li><NavLink to="/leave-review" className="nav-link">Leave a Review</NavLink></li>
-        </ul>
-      </nav>
-
-
-      <div className="user-details">
-      
-      </div>
-
+      <Sidebar></Sidebar>
 
       <div className="booking-card">
         <div className="card-header">
             <h2>My Details</h2>
         </div>
         <div className="card-body">
+            <div className="profile-picture">
+                <img src={image} alt="" />
+            </div>
+
             <div className="user-details">
                 <div>
                   <label htmlFor="name"><strong>Name:</strong></label>
                   <input type="text" id="name" name="name" placeholder="Your Name"/>
-                  <br></br>
                 </div>
 
                 <div>
@@ -49,27 +37,38 @@ function User_Personal_Details(){
                 </div>
 
                 <div>
-                  <label htmlFor="event-date"><strong>Event Date:</strong></label>
-                  <input type="date" id="event-date" name="event-date"  style={{paddingLeft:'20px'}}/><br/>
+                  <label ><strong>Date of Birth:</strong></label>
+                  <input type="date" placeholder="Date of Birth"/><br></br>
                 </div>
-
-                <div>
-                  <label htmlFor="venue"><strong>Venue:</strong></label>
-                  <input type="text" id="venue" name="venue"  placeholder="Event Venue"/><br></br>
-                </div>
-
-                <div>
-                  <label htmlFor="guests"><strong>Guests:</strong></label>
-                  <input type="number" id="guests" name="guests"  min="1" placeholder="Number of Guests"/><br></br>
-                </div>
-
-                <div>      
-                  <label htmlFor="special-requests"><strong>Special Requests:</strong></label>
-                  <input type="text" id="special-requests" name="special-requests" placeholder="Any Special Requests"/><br></br>
-                </div>
-
-                <button className="submit" type="submit">Submit</button>
             </div>
+
+            <div className="account-information">
+                <div>
+                  <label ><strong>Username:</strong></label>
+                  <input type="text" placeholder="Username"/>
+                </div>
+
+                <div>
+                  <label ><strong>Password:</strong></label>
+                  <input type="text" placeholder="Password"/><br></br>
+                </div>
+            </div>
+
+            <div className="address-location-information-container">
+                <div>
+                  <label ><strong>Address:</strong></label>
+                  <input type="text" placeholder="Address.."/><br></br>
+                </div>
+
+                <div>
+                  <label ><strong>Country:</strong></label>
+                  <input type="text" placeholder="Country"/><br></br>
+                </div>
+            </div>
+
+
+            <button className="submit" type="submit">Submit</button>
+
         </div>
       </div>
     </body>

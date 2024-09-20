@@ -5,7 +5,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
+
+  margin:50px 0px 50px 0px;
 }
 
 .booking-card {
@@ -14,52 +15,74 @@
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  height:auto;
 }
 
 .card-header {
-  background-color: #4a90e2;
-  color: white;
+  background-color:white;
+  color: #01a72b;
   padding: 20px;
   text-align: center;
+  border:2px solid #01a72b;
+  width:95%;
+  margin:20px auto 0px auto;
+  border-radius:5px;
 }
 
 .card-body {
   padding: 20px;
 }
 
-.user-details p {
-  font-size: 16px;
-  margin: 10px 0;
+.profile-picture{
+  display:flex;
+  width:100%;
+  justify-content:center;
+  align-items:center;
+  padding:10px 0px 10px 0px;
+  border:solid 5x black;
 }
 
-.user-details{
+.profile-picture img{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+}
+
+.account-information,.address-location-information-container{
+  margin-top:50px;
+}
+
+.user-details,.account-information,.address-location-information-container{
   display:flex;
   flex-direction:column;
   gap:25px;
+  border:solid 1px black;
+  padding:15px 10px 15px 10px;
+  border-radius:8px;
 }
-.user-details div{
+
+.user-details div,.account-information div,.address-location-information-container div{
   display:flex;
 }
-.user-details div label,input{
+
+.user-details div label,input , .account-information div label,input , .address-location-information-container label,input{
   display:flex;
   flex:1;
   justify-content:space-between;
   align-items:center;
   text-align:left;
   padding-left:5px;
+  font-family:poppins;
 }
-.user-details input{
+.user-details input,.account-information input,.address-location-information-container input{
   border-radius:5px;
   border:1px solid black;
 }
-.user-details input[type="date"]{
-  border-radius:5px;
-  border:1px solid black;
-  margin-left:13px;
-}
-.user-details strong {
+.user-details strong ,.account-information strong,.address-location-information-container strong{
   color: #333;
 }
+
+
 
 .card-footer {
   padding: 20px;
@@ -68,17 +91,23 @@
 }
 
 .submit{
-  background-color: #4a90e2;
-  color: white;
+  background-color: white;
+  color:  #01a72b;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width:100%;
+  margin-top:20px;
+  font-size:15px;
+  font-family:poppins;
+  border:2px solid #01a72b;
 }
 
 .submit:hover {
-  background-color: #357ABD;
+  background-color: #01a72b;
+  color:white;
 }
 
 @media (max-width: 400px) {
@@ -97,51 +126,6 @@
 }
 
 /* Body Styling */
-
-/* Navigation Panel Styling */
-.sidebar {
-  position: fixed; /* Fixed positioning to keep it on the left */
-  top: 0;
-  left: 0;
-  height: 100vh; /* Full height of the viewport */
-  width: 250px; /* Width of the sidebar */
-  background-color: #333; /* Dark background color */
-  color: white;
-  padding: 20px;
-  overflow: auto; /* Adds scroll if the content exceeds the height */
-}
-
-.sidebar .nav-list {
-  list-style: none; /* Remove bullet points */
-}
-
-.sidebar .nav-list li {
-  margin: 15px 0; /* Space between menu items */
-}
-
-.sidebar .nav-list a {
-  color: white; /* Link color */
-  text-decoration: none; /* Remove underline */
-  font-size: 18px;
-}
-
-.sidebar .nav-list a:hover {
-  text-decoration: underline; /* Underline on hover */
-}
-
-/* Main Content Styling */
-.content {
-  margin-left: 270px; /* Offset content by the width of the sidebar */
-  padding: 20px;
-}
-
-.content section {
-  margin-bottom: 40px; /* Space between sections */
-}
-
-.nav-list li a{
-  cursor:pointer;
-}
 
 .my-details-container{
   top:50%;

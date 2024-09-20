@@ -1,5 +1,9 @@
 import './User_Booking_History.css'
+import Sidebar from '../6-sidebar/Sidebar';
+
 import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+
 
 import image1 from '../images/venue-1.jpg'
 import image2 from '../images/venue-2.jpg'
@@ -9,68 +13,66 @@ import image5 from '../images/venue-5.jpg'
 import image6 from '../images/venue-6.jpg'
 
 function User_Booking_History(){
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Toggle visibility of the review section
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);  // Toggle between true and false
+  };
+
   return(
 
     <>
-      <nav class="sidebar">
-        <ul class="nav-list">
-          {/* <li><a>Book Venue</a></li>
-          <li><a>Booking History</a></li>
-          <li><a>Contact Admin</a></li>
-          <li><a class="my-details">My Details</a></li> */}
-          <li><NavLink to="/home" className="nav-link">Book Venue</NavLink></li>
-          <li><NavLink to="/booking-history" className="nav-link">Booking History</NavLink></li>
-          <li><NavLink to="/contact-admin" className="nav-link">Contact Admin</NavLink></li>
-          <li><NavLink to="/my-details" className="nav-link">My Details</NavLink></li>
-          <li><NavLink to="/leave-review" className="nav-link">Leave a Review</NavLink></li>
-        </ul>
-      </nav>
+      <Sidebar></Sidebar>
 
       <p class="booking-title">View your previous Bookings</p>
 
-      <div class="experimental-card-template">
-        <div class="location-images-container">
-          <img src={image1} alt=""></img>
-        </div>
-
-        <div class="booking-details-container">
-          <h2>Booking details</h2>
-
-          <div class="booking-details">
-            <div class="date-and-time">
-              <p><strong>Date</strong> : 20-09-2024</p>
-              <p><strong>Time</strong> : 8 P.M.</p>
+      {isVisible && (
+        <div class="experimental-card-template">
+            <div class="location-images-container">
+              <img src={image1} alt=""></img>
             </div>
 
-            <div class="service-location-duration-container">
-              <p><strong>Service Type</strong> : Hotel</p>
-              <p class="location"><strong>Location</strong> : Mulund West,Mumbai</p>
-              <p><strong>Duration</strong> : 2 Hours</p>
+            <div class="booking-details-container">
+              <h2>Booking details</h2>
+
+              <div class="booking-details">
+                <div class="date-and-time">
+                  <p><strong>Date</strong> : 20-09-2024</p>
+                  <p><strong>Time</strong> : 8 P.M.</p>
+                </div>
+
+                <div class="service-location-duration-container">
+                  <p><strong>Service Type</strong> : Hotel</p>
+                  <p class="location"><strong>Location</strong> : Mulund West,Mumbai</p>
+                  <p><strong>Duration</strong> : 2 Hours</p>
+                </div>
+              </div>
             </div>
-          </div>
+
+            <div class="payment-information-container">
+              <h2>Payment Information</h2>
+
+              <div class="payment-information">
+                <p><strong>Payment Method </strong>: Google Pay</p>
+                <p><strong>Total Cost </strong>: Rs 50,000.00</p>
+              </div>
+            </div>
+
+            <div class="additional-services-container">
+              <h2>Additional Services</h2>
+
+              <div class="additional-services">
+                <p><strong>No Additional Services requested.</strong></p>
+              </div>
+            </div>
+
         </div>
-
-        <div class="payment-information-container">
-          <h2>Payment Information</h2>
-
-          <div class="payment-information">
-            <p><strong>Payment Method </strong>: Google Pay</p>
-            <p><strong>Total Cost </strong>: Rs 50,000.00</p>
-          </div>
-        </div>
-
-        <div class="additional-services-container">
-          <h2>Additional Services</h2>
-
-          <div class="additional-services">
-            <p><strong>No Additional Services requested.</strong></p>
-          </div>
-        </div>
-
-      </div>
+      )}
 
       <div class="booking-history-list-display">
         <div class="rows">
+          <p>1. </p>
           <img src={image2} alt=""></img>
 
           <div class="date-time-cost-container">
@@ -79,10 +81,11 @@ function User_Booking_History(){
             <p><strong>Cost</strong> Rs 50,000.00</p>
           </div>
 
-          <button class="view-button">VIEW</button>
+          <button class="view-button" onClick={toggleVisibility}>VIEW</button>
         </div>
 
         <div class="rows">
+          <p>2. </p>
           <img src={image3} alt=""></img>
 
           <div class="date-time-cost-container">
@@ -95,6 +98,7 @@ function User_Booking_History(){
         </div>
 
         <div class="rows">
+          <p>3. </p>
           <img src={image4} alt=""></img>
 
           <div class="date-time-cost-container">
@@ -107,6 +111,7 @@ function User_Booking_History(){
         </div>
 
         <div class="rows">
+          <p>4. </p>
           <img src={image5} alt=""></img>
 
           <div class="date-time-cost-container">
@@ -119,6 +124,7 @@ function User_Booking_History(){
         </div>
 
         <div class="rows">
+          <p>5. </p>
           <img src={image6} alt=""></img>
 
           <div class="date-time-cost-container">
