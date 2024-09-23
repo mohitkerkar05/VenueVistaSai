@@ -5,9 +5,15 @@ import User_Booking_History from './3-User Booking History/User_Booking_History'
 import User_Home_Page from './2-User Home Page/User_Home_Page';
 import User_Personal_Details from './4-User Personal Details/User_Personal_Details';
 import User_Review from './5-User Review/User_Review';
+<<<<<<< Updated upstream
 // import LoginPage from './6-Login Page/Login_Page';
 // import RegisterPage from './7-Register Page/Register_Page';
 import Contact_Admin from './8-Contact Admin/Contact_Admin';
+=======
+import Admin_Homepage from './9-Admin Home Page/Admin_Homepage';
+import LoginPage from './6-Login Page/Login_Page';
+import RegisterPage from './7-Register Page/Register_Page';
+>>>>>>> Stashed changes
 
 function App() {
   return (
@@ -22,6 +28,7 @@ function App() {
         <Route path="/contact-admin" element={<Contact_Admin />} />
         <Route path="/my-details" element={<User_Personal_Details />} />
         <Route path="/leave-review" element={<User_Review />} />
+        <Route path="/AdminHome" element={<Admin_Homepage/>} />
         {/* <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} /> */}
         

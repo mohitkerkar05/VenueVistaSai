@@ -35,12 +35,19 @@ function Sidebar(){
 
           <div className="dashboard-element-container-div">
             <img src={contactadmin} alt="" />
+<<<<<<< Updated upstream
             <li className="list-element"> 
               <NavLink to="/contact-admin" className="nav-link">
               Contact Admin
               </NavLink>
             </li>
           </div>
+=======
+            <NavLink to="/contactadmin" className="nav-link">
+            Contact Admin
+            </NavLink>
+          </li>
+>>>>>>> Stashed changes
 
 
           <div className="dashboard-element-container-div">

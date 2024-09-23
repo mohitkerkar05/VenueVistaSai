@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid'; // Import uuid
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-// import api from '../script/api'; // Import the API service
+import { v4 as uuidv4 } from 'uuid';
 import './Register_Page.css'; // Import specific styles
 
-function RegisterPage({ onClose }) { // Add onClose prop to handle closing
+function RegisterPage() {
   const [entity, setEntity] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate(); // Hook for navigation
+  const [isVisible, setIsVisible] = useState(true); // Manage form visibility
   const uniqueId = uuidv4(); // Generate a unique ID
 
   const handleRegister = (event) => {
@@ -21,15 +19,20 @@ function RegisterPage({ onClose }) { // Add onClose prop to handle closing
     }
 
     // Example API call (replace with actual implementation)
-    api.register({ username, password, entity })
-      .then(response => {
-        navigate('/'); // Redirect to login page on successful registration
-        if (onClose) onClose(); // Close the register page on success
-      })
-      .catch(error => {
-        alert('Registration failed. Please try again.');
-      });
+    // api.register({ username, password, entity })
+    //   .then(response => {
+    //     setIsVisible(false); // Hide form on successful registration
+    //   })
+    //   .catch(error => {
+    //     alert('Registration failed. Please try again.');
+    //   });
   };
+
+  const handleClose = () => {
+    setIsVisible(false); // Simply hide the form without reloading or navigating
+  };
+
+  if (!isVisible) return null; // Do not render the component if it's not visible
 
   return (
     <div className="register-container-div">
@@ -87,7 +90,7 @@ function RegisterPage({ onClose }) { // Add onClose prop to handle closing
             <button type="submit">Register</button>
           </div>
         </form>
-        <button onClick={onClose}>Close</button> {/* Close button */}
+        <button onClick={handleClose}>Close</button> {/* Close button to hide the form */}
       </div>
     </div>
   );

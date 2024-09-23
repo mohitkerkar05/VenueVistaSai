@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid'; // Import uuid
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-import './Login_Page.css'; // Import specific styles
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
+import './Login_Page.css';
 
 function LoginPage() {
   const [entity, setEntity] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Hook for navigation
-  const uniqueId = uuidv4(); // Generate a unique ID
+  const navigate = useNavigate();
+  const uniqueId = uuidv4();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -18,8 +18,20 @@ function LoginPage() {
       return;
     }
 
-    // For demonstration, navigate to home page
-    navigate('/home');
+    // Call handleLogin1 based on entity after validation
+    switch (entity) {
+      case 'A':
+        navigate('/home');
+        break;
+      case 'B':
+        navigate('/AdminHome');
+        break;
+      case 'C':
+        navigate('/booking-history');
+        break;
+      default:
+        alert('Please select a valid entity');
+    }
   };
 
   return (
@@ -38,10 +50,9 @@ function LoginPage() {
               required
             >
               <option value="">Select an entity</option>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-              <option value="venue_manager">Venue Manager</option>
-              <option value="venue_coordinator">Venue Coordinator</option>
+              <option value="A">User</option>
+              <option value="B">Admin</option>
+              <option value="C">Venue Manager</option>
             </select>
           </div>
           <div className="form-group">
