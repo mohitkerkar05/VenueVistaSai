@@ -14,39 +14,59 @@ function Sidebar(){
     <>
       <nav className="sidebar">
         <ul className="nav-list">
-          <li className="list-element"> 
+
+          <div className="dashboard-element-container-div">
             <img src={bookvenue} alt="" /> 
-            <NavLink to="/home" className="nav-link">
-              Book Venue
-            </NavLink>
-          </li>
+            <li className="list-element"> 
+              <NavLink to="/home" className="nav-link">
+                Book Venue
+              </NavLink>
+            </li>
+          </div>
 
-          <li className="list-element"> 
+          <div className="dashboard-element-container-div">
             <img src={bookinghistory} alt="" />
-            <NavLink to="/booking-history" className="nav-link">
-            Booking History</NavLink>
-          </li>
+            <li className="list-element"> 
+              <NavLink to="/booking-history" className="nav-link">
+              Booking History</NavLink>
+            </li>
+          </div>
 
-          <li className="list-element"> 
+
+          <div className="dashboard-element-container-div">
             <img src={contactadmin} alt="" />
-            <NavLink to="/contact-admin" className="nav-link">
-            Contact Admin
-            </NavLink>
-          </li>
+            <li className="list-element"> 
+              <NavLink to="/contact-admin" className="nav-link">
+              Contact Admin
+              </NavLink>
+            </li>
+          </div>
 
-          <li className="list-element"> 
+
+          <div className="dashboard-element-container-div">
             <img src={mydetails} alt="" />
-            <NavLink to="/my-details" className="nav-link">
-            My Details
-            </NavLink>
-          </li>
+            <li className="list-element"> 
+              <NavLink to="/my-details" className="nav-link">
+              My Details
+              </NavLink>
+            </li>
 
-          <li className="list-element">
-             <img src={leavereview} alt="" />
-             <NavLink to="/leave-review" className="nav-link">
-             Leave a Review
-             </NavLink>
-          </li>
+          </div>
+
+
+          <div className="dashboard-element-container-div">
+            <img src={leavereview} alt="" />
+            <li className="list-element">
+                <NavLink to="/leave-review" className="nav-link">
+                Leave a Review
+                </NavLink>
+            </li>
+
+          </div>
+
+
+
+
         </ul>
       </nav>
     </>

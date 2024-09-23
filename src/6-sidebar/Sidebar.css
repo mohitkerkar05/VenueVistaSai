@@ -53,12 +53,19 @@
   color:black;
 }
 
-.list-element img{
+.nav-list img{
   width:25px;
   height:25px;
-  border-radius:2px;
+  border-radius:5px;
   background-color:white;
   margin-right:10px;
+  border:2px solid black;
+}
+
+.dashboard-element-container-div{
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 /* Main Content Styling */

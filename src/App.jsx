@@ -5,8 +5,9 @@ import User_Booking_History from './3-User Booking History/User_Booking_History'
 import User_Home_Page from './2-User Home Page/User_Home_Page';
 import User_Personal_Details from './4-User Personal Details/User_Personal_Details';
 import User_Review from './5-User Review/User_Review';
-import LoginPage from './6-Login Page/Login_Page';
-import RegisterPage from './7-Register Page/Register_Page';
+// import LoginPage from './6-Login Page/Login_Page';
+// import RegisterPage from './7-Register Page/Register_Page';
+import Contact_Admin from './8-Contact Admin/Contact_Admin';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         {/* Other routes */}
         <Route path="/home" element={<User_Home_Page />} />
         <Route path="/booking-history" element={<User_Booking_History />} />
+        <Route path="/contact-admin" element={<Contact_Admin />} />
         <Route path="/my-details" element={<User_Personal_Details />} />
         <Route path="/leave-review" element={<User_Review />} />
         {/* <Route path="/login" element={<LoginPage />} />

@@ -2,11 +2,34 @@
   font-family: 'Arial', sans-serif;
   background-color: #f4f7f6;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction:column;
+  height: auto;
+  width:auto;
+  margin-left:250px;
+}
 
-  margin:50px 0px 50px 0px;
+.my-details-title-container{
+  color: rgb(73, 73, 73);
+  font-family: Poppins, sans-serif;
+  font-weight: bold;
+  font-size: 25px;;
+  display:block;
+  text-align:center;
+}
+
+.content-container{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+
+.background-image-container{
+  display:flex;
+  width:auto;
+  height:auto;
+  align-items:center;
+  justify-content:center;
+  margin-left:275px;
 }
 
 .booking-card {
@@ -14,8 +37,8 @@
   width: 50vw;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   height:auto;
+  margin:25px 50px 25px 50px;
 }
 
 .card-header {
@@ -46,6 +69,8 @@
   width:100px;
   height:100px;
   border-radius:50%;
+  border:solid 2px black;
+  margin-bottom:25px;
 }
 
 .account-information,.address-location-information-container{

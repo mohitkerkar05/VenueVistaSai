@@ -1,6 +1,59 @@
+.review-page-body{
+  background-color:#f0f0f0;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  padding-left:250px;
+  height:auto;
+}
+
+.review-page-body h2{
+  font-family: poppins;
+  font-weight: bold;
+  font-size: 25px;;
+  text-align:center;
+  margin: 10px 0px 10px 0px;
+  color:rgb(73, 73, 73);
+}
+
+.page-description-container{
+  border:1px solid black;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  width:auto;
+
+  padding:5px 10px 5px 10px;;
+  border-radius:10px;
+}
+
+.page-description-container p{
+  max-width:50vw;
+  display:inline-block;
+}
+
 .user-review-body {
   background-color: #f0f0f0; /* Light grey background */
-  height: 100vh;
+  height: auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+
+.image-container{
+  margin:0px 0px 0px 0px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color:#f0f0f0; /* Light grey background */
+}
+
+.image-container img{
 }
 
 .search-container {
@@ -8,11 +61,11 @@
   border: 2px solid #01a72b;
   border-radius: 30px;
   overflow: hidden;
-  background-color: white;
+  background-color: #f0f0f0;
   width: 300px;
   height: 45px;
   justify-content: center;
-  margin:25px auto 25px auto;
+  margin:0px auto 25px auto;
 }
 
 .search-input {
@@ -55,7 +108,7 @@
 .review-writing-div{
   width:50vw;
   padding:20px 0px 20px 0px;
-  margin:10px auto 10px auto;
+  margin:10px auto 50px auto;
   border-radius:10px;
   border:2px solid black;
 }
@@ -75,12 +128,12 @@
   border-radius:10px;
   min-height:150px;
   padding:10px 0px 0px 10px;
-  background-color:white;
+  background-color:#bdd3f9;
   transition:background-color 0.5s;
 }
 
 #review:active,#review:hover{
-  background-color:#bdd3f9;
+  background-color:white;
 }
 
 #submit {
@@ -123,4 +176,40 @@
 
 .write-review-div{
   height:auto;
+}
+
+.star-rating-container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:90%;
+  margin:20px auto 20px auto;
+}
+
+.star-rating-container h2{
+  display:inline-block;
+}
+
+.star-rating {
+  display:inline;
+  direction: rtl; 
+  font-size: 2rem; /* Adjust the star size */
+}
+
+.star-rating input {
+  display: none; /* Hide radio buttons */
+}
+
+.star-rating label {
+  color: #ddd; /* Default star color */
+  cursor: pointer;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: gold; /* Hover effect: stars turn gold */
+}
+
+.star-rating input:checked ~ label {
+  color: gold; /* Stars turn gold when selected */
 }
