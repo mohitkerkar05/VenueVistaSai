@@ -6,6 +6,8 @@
   align-items:center;
   padding-left:250px;
   height:auto;
+  min-height: 100vh;
+  width:100%;
 }
 
 .review-page-body h2{
@@ -213,3 +215,74 @@
 .star-rating input:checked ~ label {
   color: gold; /* Stars turn gold when selected */
 }
+
+
+
+
+
+
+
+/* CSS for the styling of the reviews left by the users*/
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom:15px;
+}
+
+.review-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display:flex;
+}
+
+.review-text {
+  font-size: 16px;
+  color: #333;
+}
+
+.review-rating {
+  font-size: 18px;
+  color: #ffcc00;
+  padding-left:8px;
+}
+
+.review-footer {
+  font-size: 14px;
+  color: #777;
+}
+
+.star {
+  color: #ccc;
+}
+
+.star.filled {
+  color: #ffcc00;
+}
+
+.profile-image-container{
+  display:inline-block;
+  width:auto;
+  padding:10px 0px 10px 0px;
+  border:solid 5x black;
+}
+
+.profile-image{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  border:solid 2px black;
+  margin-bottom:25px;
+}
+
+.review-content-footer-container{
+  margin-left:15px;
+}
+
+.no-review-display{
+  margin-left:-10px;
+}
+
