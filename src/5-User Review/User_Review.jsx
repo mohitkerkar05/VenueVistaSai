@@ -4,6 +4,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import backgroundimage from './customer-feedback.png';
 import profileimage from '../4-User Personal Details/user.png';
 
+
+
 // User_Review Component
 function User_Review() {
   // State for controlling visibility, textarea value, rating, searchVenueId, and selectedVenue
@@ -99,7 +101,7 @@ function User_Review() {
   };
 
   // Component to display reviews for a specific venue
-  const VenueReviews = React.memo(({ venueId }) => {
+   const VenueReviews = React.memo(({ venueId }) => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
@@ -152,6 +154,8 @@ function User_Review() {
       </div>
     );
   });
+
+
 
   return (
     <div className="review-page-body">
@@ -227,5 +231,7 @@ function User_Review() {
 }
 
 export default User_Review;
+
+// export {fetchVenueDetails , handleReviewSubmit , handleTextChange , VenueDetails , VenueReviews};
 
 

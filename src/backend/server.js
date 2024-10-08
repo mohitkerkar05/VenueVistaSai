@@ -145,7 +145,7 @@ app.get('/images', (req, res) => {
   });
 });
 
-console.log(path.join(__dirname, '../images')); // Add this line
+// console.log(path.join(__dirname, '../images')); // Add this line
 // Configure Multer to store uploaded files in the 'uploads' directory
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -184,6 +184,23 @@ app.get('/api/venues/:venueId', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while fetching the venue.' });
   }
 });
+
+app.get('/api/venues/', async (req, res) => {
+  try {
+      const collection = db.collection('venues'); // Replace with your collection name
+      const venues = await collection.find({}).toArray(); // Fetch all documents
+
+      if (venues.length > 0) {
+          res.json(venues); // Return all venues if found
+      } else {
+          res.status(404).json({ message: 'No venues found' }); // Return a 404 if no venues found
+      }
+  } catch (error) {
+      console.error('Error fetching venues:', error);
+      res.status(500).json({ error: 'An error occurred while fetching the venues.' });
+  }
+});
+
 
 
 
