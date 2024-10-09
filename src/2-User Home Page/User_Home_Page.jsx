@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom';
 import './User_Home_Page.css';
 import Sidebar from '../6-sidebar/Sidebar';
 import React,{ useState, useEffect ,useCallback} from 'react';
+import profileimage from '../4-User Personal Details/user.png';
+
 
 function User_Home_Page() {
   const [data, setData] = useState([]); // Venue data
@@ -13,6 +15,10 @@ function User_Home_Page() {
   const [text, setText] = useState('');
   const [rating, setRating] = useState(null);
   const [selectedVenueId, setSelectedVenueId] = useState(null); // Selected venue ID
+
+  const [isBookingDivOpen, setIsBookingDivOpen] = useState(false);
+  const [isBookingMode, setIsBookingMode] = useState(false); // State to track booking mode
+
 
 
 
@@ -104,6 +110,7 @@ function User_Home_Page() {
       };
 
       fetchReviews();
+      console.log(reviews);
     }, [venueId]);
 
     return (
@@ -165,27 +172,84 @@ function User_Home_Page() {
 
   // Open modal with selected venue
   const openModal = (venue) => {
+    console.log(venue);
     setSelectedVenue(venue);
+    setSelectedVenueId(venue.venueId);
+
     setIsModalOpen(true);
     setIsReviewMode(false); // Reset to venue details
-
-    console.log(venue.venueId);
-    fetchVenueDetails(venue.venueId);
+    setIsBookingMode(false); // Reset to venue details
   };
+
+  useEffect(() => {
+    if (selectedVenueId) {
+      // console.log(selectedVenueId);
+      // Perform any actions that depend on selectedVenueId here
+      fetchVenueDetails(selectedVenueId);
+      console.log(selectedVenueId);
+    }
+  }, [selectedVenueId]); // Runs whenever selectedVenueId changes
 
   // Close modal when clicking outside of the modal content
   const closeModal = (e) => {
     if (e.target.className === 'modal') {
       setIsModalOpen(false);
       setIsReviewMode(false); // Reset to venue details when closed
+      setIsBookingMode(false); // Reset to venue details when closed
     }
   };
 
   // Handle review button click
   const handleLeaveReviewClick = () => {
     setIsReviewMode(true); // Switch to review mode
-    console.log(venueData);
-    {selectedVenueId && <VenueReviews venueId={selectedVenueId} />}
+    // console.log(venueData);
+  };
+
+  const openBookingDiv = () => {
+    setIsBookingDivOpen(true);
+  };
+
+  const closeBookingDiv = (e) => {
+    if (e.target.className === 'booking-div') {
+      setIsBookingDivOpen(false);
+    }
+  };
+
+  const handleBookVenueClick = () => {
+    setIsBookingMode(true); // Switch to booking mode
+  };
+
+
+
+  const handleSubmit = async () => {
+    const bookingDetails = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      email: document.getElementById('email').value,
+      date: document.getElementById('date').value,
+      time: document.getElementById('time').value,
+      duration: document.getElementById('duration').value,
+      guestCount: document.querySelector('input[placeholder="Enter your text here"]').value, // Adjust this query for guest count
+      budget: document.querySelector('input[placeholder="Enter your text here"]').value, // Adjust this query for budget
+      catering: document.getElementById('catering').checked,
+      additionalRequests: document.querySelector('.additional-requests input').value,
+    };
+  
+    try {
+      const response = await fetch('http://localhost:5000/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingDetails),
+      });
+  
+      const result = await response.json();
+      alert(result.message);
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to submit booking');
+    }
   };
 
 
@@ -222,7 +286,17 @@ function User_Home_Page() {
         )}
       </div>
 
-
+      {/* Booking Div */}
+      {/*
+      {isBookingDivOpen && (
+        <div className="booking-div" onClick={closeBookingDiv}>
+          <div className="booking-content">
+            <h2>Booking Information</h2>
+            <p>Please complete your booking...</p>
+          </div>
+        </div>
+      )}
+      */}
 
       {/* Modal for displaying venue details */}
       {isModalOpen && (
@@ -266,13 +340,129 @@ function User_Home_Page() {
                       ))}
                     </div>
                   </div>
+
                   <button id="submit" onClick={handleReviewSubmit}>
                     Submit Review
                   </button>
                 </div>
                 
+                {selectedVenueId && <VenueReviews venueId={selectedVenueId} />}
               </div>
-            ) : (
+            ): isBookingMode ? (
+              // Replace the content with an empty div when in booking mode
+              <div className="booking-form">
+                {/* You can customize this empty div further as needed */}
+                <p>Please fill in the booking details below...</p>
+                <h2>Book the Venue</h2>
+  
+                <div className="user-input-information">
+                  <label htmlFor="date">Booking Date:</label>
+                  <input 
+                    type="date" 
+                    id="date" 
+                    name="date" 
+                    required 
+                  />
+
+                  <label htmlFor="time">Booking Time:</label>
+                  <input 
+                    type="time" 
+                    id="time" 
+                    name="time" 
+                    required 
+                  />
+
+                  <label htmlFor="duration">Duration :</label>
+                  <input 
+                    type="number" 
+                    id="duration" 
+                    name="duration" 
+                    min="1" 
+                    required 
+                    placeholder="Enter duration in hours"
+                  />
+                </div>
+
+                <div className="user-input-information">
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="name" required placeholder="Enter your name"/>
+
+                  <label for="phone">Contact :</label>
+                  <input type="tel" id="phone" name="phone" required placeholder="Enter your Contact"></input>
+
+                  <label for="email">Email :</label>
+                  <input type="email" id="email" name="email" required placeholder="Enter your email address"></input>
+                </div>
+
+                <div className="user-input-information-row3">
+                  <label>Guest Count : </label>
+                  <input 
+                      type="text" 
+                      // id="stringInput"     
+                      // name="stringInput"   
+                      placeholder="Enter your text here"  
+                      required              
+                  />
+
+                  <label>Budget : </label>
+                  <input 
+                      type="number" 
+                      // id="stringInput"     
+                      // name="stringInput"   
+                      placeholder="Enter your text here"                      
+                  />
+                </div>
+
+                <div className="catering-checkbox">
+                  <label htmlFor="catering" className="catering-checkbox-label">
+                    <input type="checkbox" id="catering" name="catering"/>
+                    Wish to add on offered catering services (Your choice wil be notified to the Venue Manager.)
+                  </label>
+                </div>
+
+                <section class="coordinator-section">
+                  <h2>Meet Our Venue Coordinators</h2>
+                  <p class="description">
+                      Our platform provides you with access to our trusted venue coordinators who are ready to assist you
+                      personally with event management. Whether you're planning a wedding, corporate event, or any special
+                      occasion, our coordinators will help ensure that everything runs smoothly.
+                  </p>
+                  <div class="coordinator-container">
+                      <div class="coordinator-card">
+                          <img src="./person1.jpeg" alt="Coordinator 1" class="coordinator-img"/>
+                          <h3>John Doe</h3>
+                          <p>Senior Event Coordinator</p>
+                      </div>
+                      <div class="coordinator-card">
+                          <img src={profileimage} alt="Coordinator 2" class="coordinator-img"/>
+                          <h3>Jane Smith</h3>
+                          <p>Assistant Event Manager</p>
+                      </div>
+                      <div class="coordinator-card">
+                          <img src={profileimage} alt="Coordinator 3" class="coordinator-img"/>
+                          <h3>Michael Lee</h3>
+                          <p>Event Planner</p>
+                      </div>
+                  </div>
+              </section>
+
+                <div className="additional-requests">
+                  <input type="text" placeholder="Please add any additional features that you would like to request." />
+                </div>
+
+                <div className="button-container">
+                  <button 
+                    onClick={() => handleSubmit()}
+                    // () => alert('Booking Confirmed!')
+                    type="button" // Change type to "button" to prevent form submission if you want to handle it manually
+                  >
+                    Confirm Booking
+                  </button>
+                </div>
+
+                
+              </div>
+             ) : (
               <>
                 <div className="venue-image-container">
                   <img src={selectedVenue.imageUrl} alt={selectedVenue.venueName} className="modal-venue-image" />
@@ -295,10 +485,12 @@ function User_Home_Page() {
 
                 <div className="button-container">
                   <button onClick={handleLeaveReviewClick}>Leave a Review</button>
-                  <button>Book Venue</button>
+                  <button onClick={handleBookVenueClick}>Book Venue</button>
                 </div>
               </>
             )}
+
+
           </div>
         </div>
       )}

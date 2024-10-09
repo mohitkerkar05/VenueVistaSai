@@ -210,6 +210,227 @@ app.get('/api/venues/', async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Define the schema for the 'bookings' collection
+const bookingSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  phone: { type: String, required: true },
+  email: { type: String, required: true },
+  date: { type: Date, required: true },
+  time: { type: String, required: true },
+  duration: { type: Number, required: true },
+  guestCount: { type: Number, required: true },
+  budget: { type: Number, required: false },
+  catering: { type: Boolean, required: false },
+  additionalRequests: { type: String, required: false }
+});
+
+// Create a model for 'bookings'
+const Bookings = mongoose.model('bookings', bookingSchema);
+
+// // POST request to add booking details to the 'bookings' collection
+
+
+// app.post('/api/bookings', async (req, res) => {
+//   try {
+//     const bookingData = new Bookings({
+//       name: req.body.name,
+//       phone: req.body.phone,
+//       email: req.body.email,
+//       date: req.body.date,
+//       time: req.body.time,
+//       duration: req.body.duration,
+//       guestCount: req.body.guestCount,
+//       budget: req.body.budget,
+//       catering: req.body.catering,
+//       additionalRequests: req.body.additionalRequests
+//     });
+
+//     // Save the booking data to the database
+//     const savedBooking = await bookingData.save();
+//     res.status(201).json({ message: 'Booking saved successfully', booking: savedBooking });
+//   } catch (error) {
+//     res.status(500).json({ message: 'Failed to save booking', error });
+//   }
+// });
+
+// POST request to add booking details to the 'bookings' collection
+// app.post('/api/bookings', async (req, res) => {
+//   try {
+//     const { date, time, duration } = req.body;
+
+//     // Parse date and time
+//     const bookingStart = moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm');
+//     const bookingEnd = bookingStart.clone().add(duration, 'hours');
+
+//     // Query to find overlapping bookings
+//     const conflictingBooking = await Bookings.findOne({
+//       date: bookingStart.toDate(), // Check for the same date
+//       $or: [
+//         {
+//           time: {
+//             $gte: time, 
+//             $lt: bookingEnd.format('HH:mm') // Booking starts before current booking ends
+//           }
+//         },
+//         {
+//           $where: function() {
+//             // Custom query to check for overlap
+//             const existingStart = moment(this.date + ' ' + this.time);
+//             const existingEnd = existingStart.clone().add(this.duration, 'hours');
+//             return existingEnd.isAfter(bookingStart) && existingStart.isBefore(bookingEnd);
+//           }
+//         }
+//       ]
+//     });
+
+//     if (conflictingBooking) {
+//       // return res.status(400).json({
+//       //   message: 'The selected date and time are unavailable for booking.'
+//       // });
+//       alert('The selected date and time are unavailable for booking.')
+//     }
+
+//     // No conflict, proceed with booking
+//     const bookingData = new Bookings({
+//       name: req.body.name,
+//       phone: req.body.phone,
+//       email: req.body.email,
+//       date: req.body.date,
+//       time: req.body.time,
+//       duration: req.body.duration,
+//       guestCount: req.body.guestCount,
+//       budget: req.body.budget,
+//       catering: req.body.catering,
+//       additionalRequests: req.body.additionalRequests
+//     });
+
+//     console.log(bookingData);
+
+//     // Save the booking data to the database
+//     const savedBooking = await bookingData.save();
+//     res.status(201).json({ message: 'Booking saved successfully', booking: savedBooking });
+//   } catch (error) {
+//     res.status(500).json({ message: 'Failed to save booking', error });
+//   }
+// });
+
+// POST request to add booking details to the 'bookings' collection
+
+
+
+const moment = require('moment');
+
+app.post('/api/bookings', async (req, res) => {
+  try {
+    const { 
+      name, 
+      phone, 
+      email, 
+      date, 
+      time, 
+      duration, 
+      guestCount, 
+      budget, 
+      catering, 
+      additionalRequests 
+    } = req.body;
+
+    // Parse date and time using moment
+    const bookingStart = moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm');
+    const bookingEnd = bookingStart.clone().add(duration, 'hours');
+
+    // Validate the booking start and end times
+    if (!bookingStart.isValid() || !bookingEnd.isValid()) {
+      return res.status(400).json({ message: 'Invalid date or time' });
+    }
+
+    // Convert times to strings in 'HH:mm' format for comparison
+    const bookingStartTimeString = bookingStart.format('HH:mm');
+    const bookingEndTimeString = bookingEnd.format('HH:mm');
+
+    // Query to find overlapping bookings
+    const conflictingBooking = await Bookings.findOne({
+      date: bookingStart.toDate(), // Check for the same date
+      $or: [
+        {
+          // Compare time as strings in 'HH:mm' format
+          time: { 
+            $gte: bookingStartTimeString, 
+            $lt: bookingEndTimeString 
+          }
+        },
+        {
+          // Ensure time is being handled correctly in duration comparisons
+          $expr: {
+            $and: [
+              { 
+                $lt: [
+                  {
+                    $add: [
+                      { $dateFromString: { dateString: `${bookingStart.format('YYYY-MM-DD')} ${time}` } }, // Combine date and time for valid date
+                    ],
+                  },
+                  bookingEnd.toDate() 
+                ] 
+              },
+              { 
+                $gt: [
+                  { $dateFromString: { dateString: `${bookingStart.format('YYYY-MM-DD')} ${time}` } }, // Combine date and time for valid date
+                  bookingStart.toDate() 
+                ] 
+              }
+            ]
+          }
+        }
+      ]
+    });
+
+    // If a conflicting booking is found, respond with an error
+    if (conflictingBooking) {
+      return res.status(400).json({ message: 'The selected date and time are unavailable for booking.' });
+    }
+
+    // Create booking data
+    const bookingData = new Bookings({
+      name,
+      phone,
+      email,
+      date: bookingStart.toDate(), // Save as Date object
+      time: bookingStartTimeString, // Save time in correct format
+      duration,
+      guestCount,
+      budget,
+      catering,
+      additionalRequests
+    });
+
+    // Save the booking data to the database
+    const savedBooking = await bookingData.save();
+    res.status(201).json({ message: 'Booking saved successfully', booking: savedBooking });
+    
+  } catch (error) {
+    console.error('Error saving booking:', error);
+    res.status(500).json({ message: 'Failed to save booking', error: error.message }); // Return a specific error message
+  }
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
