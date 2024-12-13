@@ -1,109 +1,287 @@
+// import React, { useState } from 'react';
+// import axios from 'axios';
+
+// // import './Manager_Register.css';
+
+// const RegisterManager = () => {
+//   const [venueName, setVenueName] = useState('');
+//   const [managerName, setManagerName] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState(''); // New state for password
+//   const [policyAccepted, setPolicyAccepted] = useState(false); // New state for policy checkbox
+//   const [message, setMessage] = useState('');
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [isVisible, setIsVisible] = useState(true); // Manage form visibility
+
+//   const handleRegister = async (e) => {
+//     e.preventDefault();
+//     setIsLoading(true);
+//     setMessage(''); // Reset message
+
+//     if (!policyAccepted) {
+//         setMessage('You must accept the policy agreement to complete registration.');
+//         setIsLoading(false);
+//         return;
+//     }
+
+//     try {
+//         // Make a POST request to your backend for registering the manager
+//         const response = await axios.post('http://localhost:3000/api/register-manager', {
+//             venueName,
+//             managerName,
+//             email,
+//             password // Ensure you're also sending the password
+//         });
+
+//         // Handle success response
+//         if (response.data.success) {
+//           setMessage('Manager registered successfully!');
+//       } else {
+//           setMessage(response.data.message || 'Error registering manager.');
+//       }
+      
+//     } catch (error) {
+//       console.error('Error during manager registration:', error.response?.data || error.message);
+//       setMessage('There was an error registering the manager.'); // Adjust the message based on error response
+  
+  
+//     } finally {
+//         setIsLoading(false);
+//     }
+// };
+
+
+//   const handleClose = () => {
+//     setIsVisible(false); // Simply hide the form without reloading or navigating
+//   };
+
+//   if (!isVisible) return null;
+
+//   return (
+//     <div>
+//       <h2>Register as a Venue Manager</h2>
+//       <form onSubmit={handleRegister}>
+//         <div>
+//           <label>Venue Name:</label>
+//           <input
+//             type="text"
+//             value={venueName}
+//             onChange={(e) => setVenueName(e.target.value)}
+//             required
+//           />
+//         </div>
+//         <div>
+//           <label>Manager Name:</label>
+//           <input
+//             type="text"
+//             value={managerName}
+//             onChange={(e) => setManagerName(e.target.value)}
+//             required
+//           />
+//         </div>
+//         <div>
+//           <label>Email:</label>
+//           <input
+//             type="email"
+//             value={email}
+//             onChange={(e) => setEmail(e.target.value)}
+//             required
+//           />
+//         </div>
+//         <div>
+//           <label>Password:</label> {/* New password field */}
+//           <input
+//             type="password"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//             required
+//           />
+//         </div>
+
+//         {/* Policy Agreement Section */}
+//         <div style={{ marginTop: '20px' }}>
+//           <h4>Policy Agreement</h4>
+//           <p>
+//             By registering as a manager, you agree to the following terms:
+//           </p>
+//           <ul>
+//             <li>You will be solely responsible for managing the venue.</li>
+//             <li>Any violations of the platform's rules will result in your removal as a manager.</li>
+//             <li>As a manager, you must adhere to all platform policies and uphold professionalism at all times.</li>
+//           </ul>
+//           <div>
+//             <input
+//               type="checkbox"
+//               id="policy"
+//               checked={policyAccepted}
+//               onChange={(e) => setPolicyAccepted(e.target.checked)}
+//             />
+//             <label htmlFor="policy">I agree to the policy agreement</label>
+//           </div>
+//         </div>
+
+//         <button type="submit" disabled={isLoading}>
+//           {isLoading ? 'Registering...' : 'Register'}
+//         </button>
+//       </form>
+//       <button onClick={handleClose}>Close</button>
+//       {message && <p>{message}</p>}
+//     </div>
+//   );
+// };
+
+// export default RegisterManager;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState } from 'react';
 import axios from 'axios';
-
-// import './Manager_Register.css';
+import './Manager_Register.css'; // Ensure this file exists
 
 const RegisterManager = () => {
   const [venueName, setVenueName] = useState('');
   const [managerName, setManagerName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(''); // New state for password
-  const [policyAccepted, setPolicyAccepted] = useState(false); // New state for policy checkbox
+  const [contactNumber, setContactNumber] = useState('');
+  const [age, setAge] = useState('');
+  const [category, setCategory] = useState('');
+  // const [password, setPassword] = useState('');
+  const [policyAccepted, setPolicyAccepted] = useState(false);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isVisible, setIsVisible] = useState(true); // Manage form visibility
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setMessage(''); // Reset message
+    setMessage('');
 
     if (!policyAccepted) {
-        setMessage('You must accept the policy agreement to complete registration.');
-        setIsLoading(false);
-        return;
+      setMessage('You must accept the policy agreement to complete registration.');
+      setIsLoading(false);
+      return;
     }
 
     try {
-        // Make a POST request to your backend for registering the manager
-        const response = await axios.post('http://localhost:3000/api/register-manager', {
-            venueName,
-            managerName,
-            email,
-            password // Ensure you're also sending the password
-        });
+      const response = await axios.post('http://localhost:5000/api/register-manager', {
+        name: managerName,
+        email,
+        contactNumber,
+        age,
+        category,
+        venueName
+      });
 
-        // Handle success response
-        if (response.data.success) {
-          setMessage('Manager registered successfully!');
+      if (response.data.success) {
+        setMessage('Manager registered successfully!');
       } else {
-          setMessage(response.data.message || 'Error registering manager.');
+        setMessage(response.data.message || 'Error registering manager.');
       }
-      
+
     } catch (error) {
       console.error('Error during manager registration:', error.response?.data || error.message);
-      setMessage('There was an error registering the manager.'); // Adjust the message based on error response
-  
-  
+      setMessage('There was an error registering the manager.');
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
-};
-
+  };
 
   const handleClose = () => {
-    setIsVisible(false); // Simply hide the form without reloading or navigating
+    setIsVisible(false);
   };
 
   if (!isVisible) return null;
 
   return (
-    <div>
+    <div className="register-manager-block">
       <h2>Register as a Venue Manager</h2>
-      <form onSubmit={handleRegister}>
-        <div>
-          <label>Venue Name:</label>
+      <form onSubmit={handleRegister} className="register-manager-form">
+        <div className="form-group">
+          <label className="form-label">Venue Name:</label>
           <input
             type="text"
+            className="form-input"
             value={venueName}
             onChange={(e) => setVenueName(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Manager Name:</label>
+        <div className="form-group">
+          <label className="form-label">Manager Name:</label>
           <input
             type="text"
+            className="form-input"
             value={managerName}
             onChange={(e) => setManagerName(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Email:</label>
+        <div className="form-group">
+          <label className="form-label">Email:</label>
           <input
             type="email"
+            className="form-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Password:</label> {/* New password field */}
+        <div className="form-group">
+          <label className="form-label">Contact Number:</label>
+          <input
+            type="number"
+            className="form-input"
+            value={contactNumber}
+            onChange={(e) => setContactNumber(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Age:</label>
+          <input
+            type="number"
+            className="form-input"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Category:</label>
+          <input
+            type="text"
+            className="form-input"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          />
+        </div>
+        {/* <div className="form-group">
+          <label className="form-label">Password:</label>
           <input
             type="password"
+            className="form-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-
-        {/* Policy Agreement Section */}
-        <div style={{ marginTop: '20px' }}>
+        </div> */}
+        <div className="policy-agreement">
           <h4>Policy Agreement</h4>
-          <p>
-            By registering as a manager, you agree to the following terms:
-          </p>
+          <p>By registering as a manager, you agree to the following terms:</p>
           <ul>
             <li>You will be solely responsible for managing the venue.</li>
             <li>Any violations of the platform's rules will result in your removal as a manager.</li>
@@ -112,20 +290,22 @@ const RegisterManager = () => {
           <div>
             <input
               type="checkbox"
+              className="policy-checkbox"
               id="policy"
               checked={policyAccepted}
               onChange={(e) => setPolicyAccepted(e.target.checked)}
             />
-            <label htmlFor="policy">I agree to the policy agreement</label>
+            <label htmlFor="policy" className="policy-label">I agree to the policy agreement</label>
           </div>
         </div>
-
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Registering...' : 'Register'}
-        </button>
+        <div className="button-container">
+          <button type="submit" disabled={isLoading} className="submit-button">
+            {isLoading ? 'Registering...' : 'Register'}
+          </button>
+          <button type="button" onClick={handleClose} className="close-button">Close</button>
+        </div>
       </form>
-      <button onClick={handleClose}>Close</button>
-      {message && <p>{message}</p>}
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };

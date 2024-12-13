@@ -1,4 +1,4 @@
-/* Navigation Panel Styling */
+/* Sidebar Styles */
 .sidebar {
   position: fixed; /* Fixed positioning to keep it on the left */
   top: 0;
@@ -17,55 +17,55 @@
 
 .sidebar .nav-list li {
   margin: 15px 0; /* Space between menu items */
-  font-family:poppins;
-  background-color:black;
-  padding:5px 10px 5px 10px;
-  border:1px solid black;
-  border-radius:5px;
-  width:200px;
-  transition:background-color 0.25s;
+  font-family: poppins;
+  background-color: black;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 200px;
+  transition: background-color 0.25s;
 }
 
-.sidebar .nav-list li:hover{
-  background-color:white;
-  color:black;
+.sidebar .nav-list li:hover {
+  background-color: white;
+  color: black;
 }
 
 .sidebar .nav-list a {
   color: white; /* Link color */
   text-decoration: none; /* Remove underline */
   font-size: 18px;
-  transition:color 0.25s;
+  transition: color 0.25s;
 }
 
 .sidebar .nav-list a:hover {
-  border:none;
-  color:black;
+  border: none;
+  color: black;
   text-decoration: underline; /* Underline on hover */
 }
 
-.list-element{
-  display:flex;
-  align-items:center;
+.list-element {
+  display: flex;
+  align-items: center;
 }
 
-.list-element:hover{
-  color:black;
+.list-element:hover {
+  color: black;
 }
 
-.nav-list img{
-  width:25px;
-  height:25px;
-  border-radius:5px;
-  background-color:white;
-  margin-right:10px;
-  border:2px solid black;
+.nav-list img {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: white;
+  margin-right: 10px;
+  border: 2px solid black;
 }
 
-.dashboard-element-container-div{
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.dashboard-element-container-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Main Content Styling */
@@ -80,4 +80,100 @@
 
 .nav-list li a {
   cursor: pointer;
+}
+
+/* Navbar Container */
+.navbar {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+/* Profile Container */
+.profile-container {
+  padding-top: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.profile-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Profile Info Popup */
+.profile-info {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.profile-container:hover .profile-info {
+  display: block;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.email {
+  color: #555;
+  font-size: 14px;
+}
+
+/* Navbar Links */
+.navbar-links {
+  display: flex;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+}
+
+.nav-link {
+  color: #1f2937;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.nav-link:hover {
+  background-color: #e5e7eb;
+  color: #1d4ed8;
 }

@@ -5,7 +5,9 @@ import Sidebar from '../Admin Sidebar/AdSideBar';
 
 function Admin_Home_Page(){
   return(
+    
     <>
+       <h1 className="venue-title">VenueVista</h1>
         <Sidebar></Sidebar>
 
         <div class="content">

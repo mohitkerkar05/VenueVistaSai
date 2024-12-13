@@ -89,6 +89,7 @@ const Ad_Venue_Review = () => {
   // Component to render venue details
   const VenueDetails = ({ venueData }) => {
     return (
+     
       <div className="venue-information">
         <img src={venueData.imageUrl} alt={venueData.venueName} />
         <p>{venueData.venueId}</p>
@@ -117,7 +118,10 @@ const Ad_Venue_Review = () => {
     }, [venueId]);
 
     return (
-      <div>
+      <>
+        
+      {/* <div>
+    
         <h3>Reviews for Venue {venueId}</h3>
         {reviews.length > 0 ? (
           <div className="reviews-container">
@@ -149,80 +153,88 @@ const Ad_Venue_Review = () => {
         ) : (
           <p className='no-review-display'>No reviews found for this venue.</p>
         )}
-      </div>
-    );
+      </div> */}
+   
+   </> );
+   
   });
 
   return (
-    <div className="review-page-body">
-      <Sidebar/>
-      <h2>Leave a Review</h2>
-      <div className="page-description-container">
-        <p>We’d love to hear about your experience! Please take a moment to share your thoughts.</p>
-      </div>
-      <div className="image-container">
-        <img src={backgroundimage} alt="" />
-      </div>
-      <div className="user-review-body">
-        {/* Sidebar */}
-        <Sidebar />
+    // <div className="review-page-body">
+    //   <Sidebar/>
+    //   <h2>Leave a Review</h2>
+    //   <div className="page-description-container">
+    //     <p>We’d love to hear about your experience! Please take a moment to share your thoughts.</p>
+    //   </div>
+    //   <div className="image-container">
+    //     <img src={backgroundimage} alt="" />
+    //   </div>
+    //   <div className="user-review-body">
+    //     {/* Sidebar */}
+      
 
-        {/* Search Container */}
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search by Venue-ID..."
-            className="search-input"
-            value={searchVenueId}
-            onChange={(e) => setSearchVenueId(e.target.value)}
-          />
-          <button className="search-btn" onClick={handleSearch}>
-            Search
-          </button>
-        </div>
+    //     {/* Search Container */}
+    //     <div className="search-container">
+    //       <input
+    //         type="text"
+    //         placeholder="Search by Venue-ID..."
+    //         className="search-input"
+    //         value={searchVenueId}
+    //         onChange={(e) => setSearchVenueId(e.target.value)}
+    //       />
+    //       <button className="search-btn" onClick={handleSearch}>
+    //         Search
+    //       </button>
+    //     </div>
 
-        {/* Review Section */}
-        {/* {isVisible && venueData && (
-          <div className="write-review-div">
-            <VenueDetails venueData={venueData} />
+    //     {/* Review Section */}
+    //     {/* {isVisible && venueData && (
+    //       <div className="write-review-div">
+    //         <VenueDetails venueData={venueData} />
 
-            <div className="review-writing-div">
-              <textarea
-                id="review"
-                value={text}
-                onChange={handleTextChange}
-                placeholder="Leave your review about the place here..."
-              />
-              <div className="star-rating-container">
-                <h2>How would you rate your experience here?</h2>
-                <div className="star-rating">
-                  {[5, 4, 3, 2, 1].map((star) => (
-                    <React.Fragment key={star}>
-                      <input
-                        type="radio"
-                        id={`star${star}`}
-                        name="rating"
-                        value={star}
-                        onChange={() => setRating(star)}
-                      />
-                      <label htmlFor={`star${star}`} title={`${star} stars`}>
-                        &#9733;
-                      </label>
-                    </React.Fragment>
-                  ))}
-                </div>
-              </div>
-              <button id="submit" onClick={handleReviewSubmit}>
-                Submit Review
-              </button>
-            </div>
-          </div>
-        )} */}
+    //         <div className="review-writing-div">
+    //           <textarea
+    //             id="review"
+    //             value={text}
+    //             onChange={handleTextChange}
+    //             placeholder="Leave your review about the place here..."
+    //           />
+    //           <div className="star-rating-container">
+    //             <h2>How would you rate your experience here?</h2>
+    //             <div className="star-rating">
+    //               {[5, 4, 3, 2, 1].map((star) => (
+    //                 <React.Fragment key={star}>
+    //                   <input
+    //                     type="radio"
+    //                     id={`star${star}`}
+    //                     name="rating"
+    //                     value={star}
+    //                     onChange={() => setRating(star)}
+    //                   />
+    //                   <label htmlFor={`star${star}`} title={`${star} stars`}>
+    //                     &#9733;
+    //                   </label>
+    //                 </React.Fragment>
+    //               ))}
+    //             </div>
+    //           </div>
+    //           <button id="submit" onClick={handleReviewSubmit}>
+    //             Submit Review
+    //           </button>
+    //         </div>
+    //       </div>
+    //     )} */}
 
-        {/* Display fetched reviews */}
-        {selectedVenueId && <VenueReviews venueId={selectedVenueId} />}
-      </div>
-    </div>
+    //     {/* Display fetched reviews */}
+    //     {selectedVenueId && <VenueReviews venueId={selectedVenueId} />}
+    //   </div>
+    // </div>
+    <>
+    
+    <h1 className="venue-title">VenueVista</h1>
+    <Sidebar />
+    
+    </>
   );
 };
 
