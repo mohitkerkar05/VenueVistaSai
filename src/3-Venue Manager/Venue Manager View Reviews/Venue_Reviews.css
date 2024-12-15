@@ -1,0 +1,163 @@
+/* Container styles */
+.reviews-container {
+    margin: 0 auto;
+    padding: 30px; /* Increased padding for more space */
+    max-width: 1000px; /* Increased max-width for a larger container */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.reviews-container h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Reviews Chart and List Container */
+.reviews-chart-container {
+    display: flex; /* Use Flexbox for horizontal alignment */
+    gap: 30px; /* Increased space between the chart and reviews */
+}
+
+/* Chart Section */
+.chart-section {
+    flex: 2; /* Allow the chart to take more space compared to reviews */
+    max-width: 600px; /* Increased maximum width for the chart section */
+}
+
+/* Reviews List */
+.reviews-list {
+    flex: 1; /* Allow the reviews list to take remaining space */
+    overflow-y: auto; /* Enable scrolling if reviews exceed the visible area */
+    max-height: 500px; /* Increased maximum height for the reviews list */
+    padding: 10px; /* Added padding for better spacing */
+}
+
+/* Individual Review Card */
+.review-card {
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.review-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Message styles */
+.error-message {
+    color: #d9534f;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* Loading message */
+.loading-message {
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.review-details p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.close-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+    background-color: #c9302c;
+}
+
+/* Pagination Buttons */
+.previous-button,
+.next-button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.previous-button:disabled,
+.next-button:disabled {
+    background-color: #ccc; /* Gray out when disabled */
+    cursor: not-allowed; /* Change cursor when disabled */
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: space-between; /* Space out the buttons */
+}
+
+/* Optional: Style adjustments for responsiveness */
+@media (max-width: 768px) {
+    .reviews-chart-container {
+        flex-direction: column; /* Stack chart and reviews on smaller screens */
+        gap: 15px; /* Adjust gap for smaller screens */
+    }
+    
+    .chart-section, .reviews-list {
+        max-width: 100%; /* Allow full width on smaller screens */
+    }
+}

@@ -1,24 +1,80 @@
 .register-manager-block {
+  width: 500px;
+  height: 500px;
+  margin: auto; /* Center the block horizontally */
   padding: 20px;
-  background-color: #f4f4f4;
-  border: 1px solid black;
+  border: 1px solid #ccc;
   border-radius: 10px;
-  width: 90%;
-  max-width: 600px;
-  max-height: 90vh; /* Set a maximum height relative to viewport */
-  overflow-y: auto; /* Enable vertical scroll when content overflows */
-  margin: auto;
-  top: 50%;
-  left: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9; /* Light background color */
+  overflow: auto; /* Enable scrolling */
 }
 
 .register-manager-form {
   display: flex;
-  flex-direction: column;
-  gap: 1rem; /* Add space between form groups */
+  flex-direction: column; /* Arrange form elements in a column */
+  gap: 15px; /* Space between form elements */
+  min-width: 0; /* Prevent overflow of flex items */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Space between buttons */
+  margin-top: 15px; /* Space above buttons */
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+}
+
+.form-label {
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold;
+}
+
+.form-input {
+  padding: 10px; /* Add padding for better aesthetics */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px; /* Set a consistent font size */
+}
+
+.policy-agreement {
+  margin-top: 10px; /* Space above policy agreement */
+}
+
+.policy-checkbox {
+  margin-right: 10px; /* Space between checkbox and label */
+}
+
+/* .button-container {
+  display: flex;
+  justify-content: space-between; 
+  }/* Space between buttons */
+
+
+.submit-button, .close-button {
+  padding: 10px 20px; /* Add padding to buttons */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px; /* Set a consistent font size */
+}
+
+.submit-button {
+  background-color: #4CAF50; /* Green background for submit button */
+  color: white; /* White text */
+}
+
+.close-button {
+  background-color: #f44336; /* Red background for close button */
+  color: white; /* White text */
+}
+
+.message {
+  margin-top: 10px;
+  color: red; /* Error message color */
+  text-align: center; /* Center the message */
 }

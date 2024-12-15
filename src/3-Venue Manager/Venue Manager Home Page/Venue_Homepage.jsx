@@ -1,33 +1,34 @@
-import { NavLink } from 'react-router-dom';
-
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import VeSidebar from '../Venue Manager Sidebar/VeSideBar';
+// import venuemanagerimage from '../../images/venue-manager-image.jpg';
+import Logout from "../../Logout/Logout"; // Import the LogoutButton component
 import './Venue_Homepage.css';
-import Sidebar from '../Venue Manager Sidebar/VeSideBar';
 
-function User_Home_Page(){
-  return(
-    <>
-        <Sidebar></Sidebar>
+function Venue_Home_Page() {
+  const navigate = useNavigate();
 
-        <div class="content">
-          <section id="home">
-            <h1>Home</h1>
-            <p>Welcome to our website!</p>
-          </section>
-          <section id="services">
-            <h1>Services</h1>
-            <p>Here are the services we offer.</p>
-          </section>
-          <section id="about">
-            <h1>About</h1>
-            <p>Learn more about us.</p>
-          </section>
-          <section id="contact">
-            <h1>Contact</h1>
-            <p>Get in touch with us.</p>
+  return (
+    <div className="page-container">
+      
+      <header className="header">
+      <h1 className="all-booking-title">VenueVista</h1>
+      <Logout /> 
+        <VeSidebar />
+      </header>
+
+      <div className="content">
+        <div className="background-image">
+          {/* <img src={venuemanagerimage} alt="Venue Manager" className="manager-image" /> */}
+          <section id="home" className="overlay">
+            <h1>Welcome, Dear Manager!</h1>
+            <p>We are excited to assist you in managing your venue!</p>
+            
           </section>
         </div>
-    </>
-  )
+      </div>
+    </div>
+  );
 }
 
-export default User_Home_Page;
+export default Venue_Home_Page;

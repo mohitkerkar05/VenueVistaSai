@@ -3,6 +3,10 @@ const { MongoClient , ServerApiVersion } = require('mongodb');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+
 
 const multer = require('multer');  // Import multer
 const path = require('path');      // Import path
@@ -79,57 +83,6 @@ mongoose.connect('mongodb://localhost:27017/TEST')
   .then(() => console.log('Mongoose connected to MongoDB'))
   .catch((err) => console.error('Mongoose connection error:', err));
 
-// Define the Review schema
-// const reviewSchema = new mongoose.Schema({
-//   text: { type: String, required: true },
-//   rating: { type: Number, required: true },
-//   venueId: { type: String, required: true },
-//   venueName: { type: String, required: true },
-//   venueLocation: { type: String, required: true },
-// }, { timestamps: true });
-
-// // Create a model for the Review collection
-// const Review = mongoose.model('Review', reviewSchema);
-
-// // POST endpoint to add a review
-// app.post('/addReview-to-cluster', async (req, res) => {
-//   try {
-//     const { text, rating, venueId, venueName, venueLocation } = req.body; // Get all fields from the request body
-
-//     // Create a new review document
-//     const newReview = new Review({
-//       text,
-//       rating,
-//       venueId,
-//       venueName,
-//       venueLocation,
-//     });
-
-//     // Save the review to the database
-//     const savedReview = await newReview.save();
-//     res.status(201).json({ message: 'Review added successfully', review: savedReview });
-//   } catch (error) {
-//     console.error('Error adding review:', error);
-//     res.status(500).json({ error: 'Failed to add review', details: error });
-//   }
-// });
-
-// // In your Express route handler (server.js)
-// app.get('/reviews/:venueId', async (req, res) => {
-//   const { venueId } = req.params;
-//   try {
-//     // Ensure we use the correct query to find reviews based on venueId
-//     const reviews = await Review.find({ venueId: venueId }); // Ensure venueId matches exactly
-  
-//     if (reviews.length > 0) {
-//       res.json(reviews); // Return the reviews if found
-//     } else {
-//       res.status(404).json({ message: 'No reviews found for this venue.' });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ error: 'An error occurred while fetching reviews.' });
-//   }
-// });
 
 
 const fs = require('fs');
@@ -171,103 +124,6 @@ app.post('/upload', upload.single('image'), (req, res) => {
       res.status(400).json({ message: 'Image upload failed' });
   }
 });
-
-// app.get('/api/venues/:venueId', async (req, res) => {
-//   const { venueId } = req.params; // Extract venueId from request parameters
-
-//   try {
-//       const collection = db.collection('venues'); // Replace with your collection name
-//       const venue = await collection.findOne({ venueId: venueId }); // Find document by venueId
-
-//       if (venue) {
-//           res.json(venue); // Return the venue document if found
-//       } else {
-//           res.status(404).json({ message: 'Venue not found' }); // Return a 404 if no venue found
-//       }
-//   } catch (error) {
-//       console.error('Error fetching venue:', error);
-//       res.status(500).json({ error: 'An error occurred while fetching the venue.' });
-//   }
-// });
-
-// app.get('/api/venues/', async (req, res) => {
-//   try {
-//       const collection = db.collection('venues'); // Replace with your collection name
-//       const venues = await collection.find({}).toArray(); // Fetch all documents
-
-//       if (venues.length > 0) {
-//           res.json(venues); // Return all venues if found
-//       } else {
-//           res.status(404).json({ message: 'No venues found' }); // Return a 404 if no venues found
-//       }
-//   } catch (error) {
-//       console.error('Error fetching venues:', error);
-//       res.status(500).json({ error: 'An error occurred while fetching the venues.' });
-//   }
-// });
-
-// app.post('/api/insertOrUpdateUser', async (req, res) => {
-//   const { username, name, email, phone, DOB, password, address, Country } = req.body;
-
-//   try {
-//     const existingUser = await User.findOne({ username });
-
-//     if (existingUser) {
-//       // Update existing user
-//       await User.updateOne({ username }, { name, email, phone, DOB, password, address, Country });
-//       return res.json({ success: true, message: 'User details updated successfully' });
-//     } else {
-//       // Insert new user
-//       const newUser = new User({ username, name, email, phone, DOB, password, address, Country });
-//       await newUser.save();
-//       return res.json({ success: true, message: 'User details inserted successfully' });
-//     }
-//   } catch (error) {
-//     return res.status(500).json({ success: false, message: 'Server error' });
-//   }
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Registering User on website
 app.post('/api/register', async (req, res) => {
@@ -328,33 +184,6 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.post('/generate-receipt', async (req, res) => {
   const bookingInfo = req.body;  // Get the booking info sent from frontend
   // You can add any necessary logic here to format or save the booking data
@@ -363,109 +192,10 @@ app.post('/generate-receipt', async (req, res) => {
   res.json({ success: true, receiptData: bookingInfo });
 });
 
-
-
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 require('dotenv').config();
 
@@ -498,131 +228,6 @@ async function connectWithMongoClient() {
 // Call the connect function
 connectWithMongoClient().catch(console.dir);
 
-
-// Define the schema for the 'bookings' collection
-// const newbookingSchema = new mongoose.Schema({
-//   occasion: { type: String, required: true },        // Required field for occasion
-//     date: { type: Date, required: true },              // Required field for date
-//     time: { type: String, required: true },             // Required field for time
-//     duration: { type: Number, required: true },         // Required field for duration
-//     guestCount: { type: Number, required: true },       // Required field for guest count
-//     budget: { type: Number, required: false },          // Optional field for budget
-//     catering: { type: String, required: false },       // Optional field for catering (boolean)
-//     drinks: { type: String, required: false },          // Optional field for drinks
-//     name: { type: String, required: true },             // Required field for name
-//     phone: { type: String, required: true },            // Required field for phone
-//     email: { type: String, required: true },            // Required field for email
-//     additionalRequests: { type: String, required: false } // Optional field for additional requests
-// });
-
-// Create a model for 'bookings'
-// const Bookings = mongoose.model('bookings-new', newbookingSchema);
-
-// const Bookings = mongoose.model('Bookings', bookingSchema);
-
-// app.get('/get-bookings-news-from-cluster', async (req, res) => { 
-//   try {
-//     // Access the bookings collection in your MongoDB Atlas cluster
-//     const collection = client.db("VenueVista").collection("Bookings"); // Replace with your actual database and collection names
-
-//     // Query to find reviews based on venueId
-//     const Bookings = await collection.find({}).toArray(); // Convert cursor to array
-
-//     if (Bookings.length > 0) {
-//       res.json(Bookings); // Return the reviews if found
-//     } else {
-//       res.status(404).json({ message: 'No Bookings found!' });
-//     }
-//   } catch (error) {
-//     console.error('Error fetching Bookings:', error);
-//     res.status(500).json({ error: 'An error occurred while fetching Bookings.' });
-//   }
-// });
-
-// POST request to add booking details to the 'bookings' collection
-// app.post('/bookings-new-to-cluster', async (req, res) => {
-//   try {
-//     const {
-//       occasion,
-//       date,
-//       time,
-//       duration,
-//       guestCount,
-//       budget,
-//       catering,
-//       drinks,
-//       name,
-//       phone,
-//       email,
-//       additionalRequests
-//     } = req.body;
-
-//     // Parse date and time using moment
-//     const bookingStart = moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm');
-//     const bookingEnd = bookingStart.clone().add(duration, 'hours');
-
-//     // Validate the booking start and end times
-//     if (!bookingStart.isValid() || !bookingEnd.isValid()) {
-//       return res.status(400).json({ message: 'Invalid date or time' });
-//     }
-
-//     // Convert times to strings in 'HH:mm' format for comparison
-//     const bookingStartTimeString = bookingStart.format('HH:mm');
-//     const bookingEndTimeString = bookingEnd.format('HH:mm');
-
-//     // Query to find overlapping bookings
-//     const conflictingBooking = await Bookings.findOne({
-//       date: bookingStart.toDate(), // Check for the same date
-//       $or: [
-//         {
-//           // Compare time as strings in 'HH:mm' format
-//           time: {
-//             $gte: bookingStartTimeString,
-//             $lt: bookingEndTimeString
-//           }
-//         },
-//         {
-//           // Check if the current booking time overlaps with any existing bookings
-//           $expr: {
-//             $and: [
-//               { $gt: [moment(bookingEnd).toDate(), '$date'] }, // bookingEnd must be after existing booking's date
-//               { $lt: [moment(bookingStart).toDate(), { $add: ['$date', { $multiply: ['$duration', 3600000] }] }] } // bookingStart must be before the existing booking's end time
-//             ]
-//           }
-//         }
-//       ]
-//     });
-
-//     // If a conflicting booking is found, respond with an error
-//     if (conflictingBooking) {
-//       return res.status(400).json({ message: 'The selected date and time are unavailable for booking.' });
-//     }
-
-//     // Create booking data
-//     const bookingData = new Bookings({
-//       occasion,
-//       date: bookingStart.toDate(), // Save as Date object
-//       time: bookingStartTimeString, // Save time in correct format
-//       duration,
-//       guestCount,
-//       budget,
-//       catering,
-//       drinks,
-//       name,
-//       phone,
-//       email,
-//       additionalRequests
-//     });
-
-//     // Save the booking data to the database
-//     const savedBooking = await bookingData.save();
-//     res.status(201).json({ message: 'Booking saved successfully', booking: savedBooking });
-    
-//   } catch (error) {
-//     console.error('Error saving booking:', error);
-//     res.status(500).json({ message: 'Failed to save booking', error: error.message }); // Return a specific error message
-//   }
-// });
 
 app.post('/bookings-new-to-cluster', async (req, res) => {
   try {
@@ -778,27 +383,27 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/managers', async (req, res) => {
-    try {
-        const managerCollection = client.db("VenueVista").collection("Manager");
-        const managers = await managerCollection.find({}).toArray();
-        res.json(managers);
-    } catch (error) {
-        console.error('Error fetching managers:', error);
-        res.status(500).send('Error fetching managers');
-    }
-});
+// app.get('/managers', async (req, res) => {
+//     try {
+//         const managerCollection = client.db("VenueVista").collection("Manager");
+//         const managers = await managerCollection.find({}).toArray();
+//         res.json(managers);
+//     } catch (error) {
+//         console.error('Error fetching managers:', error);
+//         res.status(500).send('Error fetching managers');
+//     }
+// });
 
-app.get('/users', async (req, res) => {
-  try {
-    const user= client.db("VenueVista").collection("User");
-    const users = await user.find({}).toArray(); // Fetch all documents
-    res.json(users); // Return the venues as JSON
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    res.status(500).send('Error fetching users');
-  }
-});
+// app.get('/users', async (req, res) => {
+//   try {
+//     const user= client.db("VenueVista").collection("User");
+//     const users = await user.find({}).toArray(); // Fetch all documents
+//     res.json(users); // Return the venues as JSON
+//   } catch (error) {
+//     console.error('Error fetching user:', error);
+//     res.status(500).send('Error fetching users');
+//   }
+// });
 
 
 app.get('/venues-from-cluster', async (req, res) => {
@@ -836,183 +441,420 @@ app.get('/venues-from-cluster/:venueId', async (req, res) => {
 
 const saltRounds = 10; // Define saltRounds before using it in bcrypt.hash
 //Register User
-app.post('/api/register-user', async (req, res) => {
-  const { username, password, email, name ,contactnumber} = req.body;
+// app.post('/api/register-user', async (req, res) => {
+//   const { username, password, email, name ,contactnumber} = req.body;
 
+//   try {
+//     // Hash the password before storing it
+//     const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+//     const database = client.db('VenueVista');
+//     // console.log(database);
+//     const userCollection = database.collection('User'); // Use your collection name
+
+//     const newUser = {
+//       username,
+//       password: hashedPassword, // Store the hashed password
+//       email,
+//       name,
+//       contactnumber,
+//     };
+
+//     await userCollection.insertOne(newUser);
+//     return res.json({ success: true, message: 'User registered successfully!' });
+//   } catch (error) {
+//     console.error('Error registering User:', error);
+//     return res.status(500).json({ success: false, message: 'Server error during registration.' });
+//   }
+// });
+
+
+// // API endpoint to register a manager
+// app.post('/api/register-manager', async (req, res) => {
+//     const { name, email, contactNumber, age, category, venueName } = req.body;
+
+//     try {
+//         const trimmedVenueName = venueName.trim();
+//         const trimmedCategory = category.trim();
+
+//         const database = client.db('VenueVista');
+//         const venueCollection = database.collection('Venues');
+
+//         const venue = await venueCollection.findOne({
+//             "Venue Name": trimmedVenueName,
+//             "Category": trimmedCategory,
+//         });
+
+//         if (!venue) {
+//             return res.status(400).json({ success: false, message: 'Venue not found or category mismatch.' });
+//         }
+
+//         const newManager = {
+//             name,
+//             email,
+//             contact_number: contactNumber,
+//             age,
+//             category: trimmedCategory,
+//             venueId: venue._id,
+//             venue_name: trimmedVenueName,
+//         };
+
+//         const managerCollection = database.collection('Manager');
+//         await managerCollection.insertOne(newManager);
+
+//         return res.json({ success: true, message: 'Manager registered successfully!' });
+//     } catch (error) {
+//         console.error('Error registering manager:', error);
+//         return res.status(500).json({ success: false, message: 'Server error during registration.' });
+//     }
+// });
+
+
+app.get('/venues', async (req, res) => {
   try {
-    // Hash the password before storing it
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-    const database = client.db('VenueVista');
-    // console.log(database);
-    const userCollection = database.collection('User'); // Use your collection name
-
-    const newUser = {
-      username,
-      password: hashedPassword, // Store the hashed password
-      email,
-      name,
-      contactnumber,
-    };
-
-    await userCollection.insertOne(newUser);
-    return res.json({ success: true, message: 'User registered successfully!' });
+    const venuesCollection = client.db("VenueVista").collection("Venues");
+    const venues = await venuesCollection.find({}).toArray(); // Fetch all documents
+    res.json(venues); // Return the venues as JSON
   } catch (error) {
-    console.error('Error registering User:', error);
-    return res.status(500).json({ success: false, message: 'Server error during registration.' });
+    console.error('Error fetching venues:', error);
+    res.status(500).send('Error fetching venues');
   }
 });
 
 
-// API endpoint to register a manager
-app.post('/api/register-manager', async (req, res) => {
-    const { name, email, contactNumber, age, category, venueName } = req.body;
-
-    try {
-        const trimmedVenueName = venueName.trim();
-        const trimmedCategory = category.trim();
-
-        const database = client.db('VenueVista');
-        const venueCollection = database.collection('Venues');
-
-        const venue = await venueCollection.findOne({
-            "Venue Name": trimmedVenueName,
-            "Category": trimmedCategory,
-        });
-
-        if (!venue) {
-            return res.status(400).json({ success: false, message: 'Venue not found or category mismatch.' });
-        }
-
-        const newManager = {
-            name,
-            email,
-            contact_number: contactNumber,
-            age,
-            category: trimmedCategory,
-            venueId: venue._id,
-            venue_name: trimmedVenueName,
-        };
-
-        const managerCollection = database.collection('Manager');
-        await managerCollection.insertOne(newManager);
-
-        return res.json({ success: true, message: 'Manager registered successfully!' });
-    } catch (error) {
-        console.error('Error registering manager:', error);
-        return res.status(500).json({ success: false, message: 'Server error during registration.' });
-    }
+// Route to get all venues from the Venues collection
+app.get('/venues1', async (req, res) => {
+  try {
+    const venues1Collection = client.db("VenueVista").collection("venues1");
+    const venues1 = await venues1Collection.find({}).toArray(); // Fetch all documents
+    res.json(venues1); // Return the venues as JSON
+  } catch (error) {
+    console.error('Error fetching venues:', error);
+    res.status(500).send('Error fetching venues');
+  }
 });
 
-// Start the server
-// app.listen(PORT, async () => {
-//     await connectWithMongoClient(); // Ensures MongoDB is connected before starting the server
-//     console.log(`Server is running on port ${PORT}`);
+
+// Route to managers
+app.get('/managers', async (req, res) => {
+  try {
+    const manager= client.db("VenueVista").collection("Manager");
+    const managers = await manager.find({}).toArray(); // Fetch all documents
+    res.json(managers); // Return the venues as JSON
+  } catch (error) {
+    console.error('Error fetching manager:', error);
+    res.status(500).send('Error fetching manager');
+  }
+});
+
+//Route to Users
+app.get('/users', async (req, res) => {
+  try {
+    const user= client.db("VenueVista").collection("User");
+    const users = await user.find({}).toArray(); // Fetch all documents
+    res.json(users); // Return the venues as JSON
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).send('Error fetching users');
+  }
+});
+
+app.get('/bookings', async (req, res) => {
+  try {
+    const bookingsCollection = client.db("VenueVista").collection("Bookings");
+    const bookings = await bookingsCollection.find({}).toArray(); // Fetch all documents
+    res.json(bookings); // Return the venues as JSON
+  } catch (error) {
+    console.error('Error fetching bookings:', error);
+    res.status(500).send('Error fetching bookings');
+  }
+});
+
+
+app.get('/reviews', async (req, res) => {
+  try {
+    const reviewsCollection = client.db("VenueVista").collection("Reviews");
+    const reviews = await reviewsCollection.find({}).toArray(); // Fetch all documents
+    res.json(reviews); // Return the venues as JSON
+  } catch (error) {
+    console.error('Error fetching bookings:', error);
+    res.status(500).send('Error fetching bookings');
+  }
+});
+
+app.get('/reviews-main', async (req, res) => {
+  try {
+      const reviewsCollection = client.db("VenueVista").collection("Reviews");
+      const reviews = await reviewsCollection.find({ venueName: "Advik Banquets" }).toArray(); // Fetch only documents with venueName "Advik Banquets"
+      res.json(reviews); // Return the filtered reviews as JSON
+  } catch (error) {
+      console.error('Error fetching reviews:', error);
+      res.status(500).send('Error fetching reviews');
+  }
+});
+
+
+app.get('/reviews-backup', async (req, res) => {
+try {
+    const reviewsCollection = client.db("VenueVista").collection("Reviews");
+    const reviews = await reviewsCollection.find({ venueName: "Mohit Banquets and Plaza" }).toArray(); // Fetch only documents with venueName "Advik Banquets"
+    res.json(reviews); // Return the filtered reviews as JSON
+} catch (error) {
+    console.error('Error fetching reviews:', error);
+    res.status(500).send('Error fetching reviews');
+}
+});
+
+
+app.get('/bookings-main', async (req, res) => {
+try {
+  const bookingsCollection = client.db("VenueVista").collection("Bookings");
+  const bookings = await bookingsCollection.find({ venueName: "Advik Banquets" }).toArray(); // Fetch only documents with venueName "Advik Banquets"
+  res.json(bookings); // Return the filtered reviews as JSON
+} catch (error) {
+  console.error('Error fetching reviews:', error);
+  res.status(500).send('Error fetching reviews');
+}
+});
+
+
+
+
+
+
+// API endpoint to register a manager
+app.post('/api/register-manager', async (req, res) => {
+const { name, email, contactNumber, age, password, venueName } = req.body;
+
+try {
+const hashedPassword = await bcrypt.hash(password, saltRounds);
+const trimmedVenueName = venueName.trim();
+
+console.log(`Venue search parameters: Name - ${trimmedVenueName}`);
+
+const database = client.db('VenueVista');
+const venueCollection = database.collection('venues1');
+
+const venue = await venueCollection.findOne({
+"venueName": trimmedVenueName,
+});
+
+console.log('Database venue found:', venue);
+
+if (!venue) {
+return res.status(400).json({ success: false, message: 'Venue not found.' });
+}
+
+const newManager = {
+name,
+email,
+contact_number: contactNumber,
+age,
+manager_password: hashedPassword,
+venueId: venue._id,
+venueName: trimmedVenueName,
+};
+
+const managerCollection = database.collection('Manager');
+await managerCollection.insertOne(newManager);
+
+return res.json({ success: true, message: 'Manager registered successfully!' });
+} catch (error) {
+console.error('Error registering manager:', error);
+return res.status(500).json({ success: false, message: 'Server error during registration.' });
+}
+});
+
+
+
+
+//user register
+app.post('/api/register-user', async (req, res) => {
+const { username, password, email, name ,contactnumber} = req.body;
+
+try {
+// Hash the password before storing it
+const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+const database = client.db('VenueVista');
+// console.log(database);
+const userCollection = database.collection('User'); // Use your collection name
+
+const newUser = {
+username,
+password: hashedPassword, // Store the hashed password
+email,
+name,
+contactnumber,
+};
+
+await userCollection.insertOne(newUser);
+return res.json({ success: true, message: 'User registered successfully!' });
+} catch (error) {
+console.error('Error registering User:', error);
+return res.status(500).json({ success: false, message: 'Server error during registration.' });
+}
+});
+
+//user delete
+app.post('/api/delete-user', async (req, res) => {
+const { username } = req.body; // Assuming you want to delete by userName, you can change this to userId or email, etc.
+
+if (!username) {
+return res.status(400).json({ success: false, message: 'User name is required for deletion.' });
+}
+
+try {
+const database = client.db('VenueVista');
+const userCollection = database.collection('User');
+
+// Delete user based on the userName
+const result = await userCollection.deleteOne({ username: username });
+
+if (result.deletedCount === 1) {
+return res.json({ success: true, message: 'User deleted successfully!' });
+} else {
+return res.status(404).json({ success: false, message: 'User not found.' });
+}
+} catch (error) {
+console.error('Error deleting User:', error);
+return res.status(500).json({ success: false, message: 'Server error during deletion.' });
+}
+});
+
+
+//manager delete
+app.post('/api/delete-manager', async (req, res) => {
+const { name } = req.body; // Assuming you want to delete by userName, you can change this to userId or email, etc.
+
+if (!name) {
+return res.status(400).json({ success: false, message: 'Manager name is required for deletion.' });
+}
+
+try {
+const database = client.db('VenueVista');
+const managerCollection = database.collection('Manager');
+
+// Delete user based on the userName
+const result = await managerCollection.deleteOne({ name: name});
+
+if (result.deletedCount === 1) {
+return res.json({ success: true, message: 'manager deleted successfully!' });
+} else {
+return res.status(404).json({ success: false, message: 'Manager not found.' });
+}
+} catch (error) {
+console.error('Error deleting Manager:', error);
+return res.status(500).json({ success: false, message: 'Server error during deletion.' });
+}
+});
+
+
+// User login
+// Login Route
+app.post('/api/user-login', async (req, res) => {
+const { username, password } = req.body;
+
+const database = client.db('VenueVista');
+const userCollection = database.collection('User');
+
+try {
+// Find user by username
+const user = await userCollection.findOne({ username });
+if (!user || !(await bcrypt.compare(password, user.password))) {
+return res.status(401).json({ success: false, message: 'Invalid credentials' });
+}
+
+// Generate JWT token
+const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+return res.json({ success: true, token });
+} catch (error) {
+console.error("Error during user login:", error);
+return res.status(500).json({ success: false, message: 'Internal server error' });
+}
+});
+
+//authorizaation of jwt token
+// Middleware to verify token
+const authenticateToken = (req, res, next) => {
+const token = req.headers['authorization']?.split(' ')[1];
+if (!token) return res.sendStatus(401); // Unauthorized
+jwt.verify(token, 'your_secret_key', (err, user) => {
+if (err) return res.sendStatus(403); // Forbidden
+req.user = user;
+next();
+});
+};
+
+// Protected Route Example
+// app.get('/api/protected', authenticateToken, (req, res) => {
+//   res.json({ message: 'This is a protected route', userId: req.user.userId });
 // });
 
-//shreyash
 
-// const customerSchema = new mongoose.Schema({
-//   username: String,
-//   name: String,
-//   email: String,
-//   phone: String,
-// });
+// Logout Route (Optional)
+app.post('/api/logout', (req, res) => {
+// No action needed for logout since JWT is stateless
+res.json({ success: true, message: 'Logged out successfully' });
+});
 
-// const Customer = mongoose.model('Customer', customerSchema);
-// app.get('/api/User', async (req, res) => {
+
+
+//manager login
+// Manager Login Route
+
+
+// Manager Login Route
+// Manager Login Route
+app.post('/api/manager-login', async (req, res) => {
+const { username, password } = req.body; // Using username for venue_name and password
+
+const database = client.db('VenueVista');
+const managerCollection = database.collection('Manager'); // The collection name is Manager
+
+try {
+// Find manager by "venue_name"
+const manager = await managerCollection.findOne({ "venueName": username });
+
+// Check if manager exists and verify password
+if (!manager || !(await bcrypt.compare(password, manager.manager_password))) {
+return res.status(401).json({ success: false, message: 'Invalid credentials' });
+}
+
+// Generate JWT token
+const token = jwt.sign({ managerId: manager._id, venueName: manager.venueName }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+console.log('Generated JWT Token:', token); // Log the generated token
+
+return res.json({ success: true, token });
+} catch (error) {
+console.error('Error during manager login:', error);
+return res.status(500).json({ success: false, message: 'Login failed. Please try again.' });
+}
+});
+
+// Fetch Reviews Route
+// app.get('/api/reviews-on-manager', async (req, res) => {
+//   const token = req.headers['authorization']?.split(' ')[1]; // Assuming token is sent in the Authorization header
+
+//   console.log('Received JWT Token:', token); // Log the received token
+
+//   if (!token) {
+//     return res.status(401).json({ success: false, message: 'No token provided' });
+//   }
+
 //   try {
-//       const User = await Customer.find();
-//       res.json(customers);
+//     const decodedToken = jwt.verify(token, process.env.JWT_SECRET); // Verify the token
+//     const venueName = decodedToken.venueName; // Get the venueName from the token
+
+//     const reviewsCollection = client.db("VenueVista").collection("Reviews");
+//     const reviews = await reviewsCollection.find({ venueName }).toArray(); // Fetch reviews specific to the venue
+
+//     res.json(reviews); // Return the filtered reviews as JSON
 //   } catch (error) {
-//       console.error("Error fetching customers:", error);
-//       res.status(500).json({ message: 'Error fetching customers' });
+//     console.error('Error fetching reviews:', error);
+//     res.status(500).json({ success: false, message: 'Error fetching reviews' });
 //   }
 // });
 
-// // Delete a customer by username
-// app.delete('/api/User/username/:username', async (req, res) => {
-//   const { username } = req.params;
-//   console.log("Received delete request for username:", username); // Log the username
 
-//   try {
-//       const deletedCustomer = await Customer.findOneAndDelete({ username });
-//       if (!deletedCustomer) {
-//           return res.status(404).json({ message: 'Customer not found' });
-//       }
-//       res.status(200).json({ message: 'Customer deleted successfully' });
-//   } catch (err) {
-//       console.error("Error deleting customer:", err);
-//       res.status(500).json({ message: 'Error deleting customer' });
-//   }
-// });
-// const ManagerSchema = new mongoose.Schema({
-//   username: { type: String, required: true, unique: true },
-//   name: { type: String, required: true },
-//   phone: { type: String, required: true },
-//   email: { type: String, required: true },
-//   password: { type: String, required: true },
-//   venueName: { type: String, required: true } // Assuming a manager has a venue name
-// });
-
-// const VenueSchema = new mongoose.Schema({
-//   venueName: { type: String, required: true, unique: true },
-//   venueAddress: { type: String, required: true },
-//   price: { type: Number, required: true },
-//   additionalServices: { type: [String], default: [] }
-// });
-
-// const Manager = mongoose.model('Manager', ManagerSchema);
-// const Venue = mongoose.model('Venue', VenueSchema);
-
-// // Routes
-
-// // Get all managers
-// app.get('/api/managers', async (req, res) => {
-//   try {
-//       const managers = await Manager.find();
-//       res.json(managers);
-//   } catch (error) {
-//       res.status(500).json({ message: 'Failed to fetch managers' });
-//   }
-// });
-
-// // Get venue details by manager username
-// app.get('/api/venue/manager/:venueName', async (req, res) => {
-//   try {
-//       const manager = await Manager.findOne({ username: req.params.username });
-//       if (!manager) {
-//           return res.status(404).json({ message: 'Manager not found' });
-//       }
-//       const venue = await Venue.findOne({ venueName: manager.venueName });
-//       res.json(venue);
-//   } catch (error) {
-//       res.status(500).json({ message: 'Failed to fetch venue details' });
-//   }
-// });
-
-// // Get venue details by venue name
-// app.get('/api/venue/venueName/:venueName', async (req, res) => {
-//   try {
-//       const venue = await Venue.findOne({ venueName: req.params.venueName });
-//       if (!venue) {
-//           return res.status(404).json({ message: 'Venue not found' });
-//       }
-//       res.json(venue);
-//   } catch (error) {
-//       res.status(500).json({ message: 'Failed to fetch venue details' });
-//   }
-// });
-
-// // Delete a manager by username
-// app.delete('/api/managers/username/:username', async (req, res) => {
-//   try {
-//       const result = await Manager.findOneAndDelete({ username: req.params.username });
-//       if (!result) {
-//           return res.status(404).json({ message: 'Manager not found' });
-//       }
-//       res.json({ message: 'Manager deleted successfully!' });
-//   } catch (error) {
-//       res.status(500).json({ message: 'Failed to delete manager' });
-//   }
-// });
