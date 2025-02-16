@@ -1402,7 +1402,7 @@ const Ad_User_Details = () => {
     useEffect(() => {
         const fetchCustomers = async () => {
             try {
-                const response = await fetch('http://localhost:5000/users');
+                const response = await fetch('http://localhost:5001/users');
                 if (!response.ok) {
                     throw new Error('Failed to fetch customers');
                 }

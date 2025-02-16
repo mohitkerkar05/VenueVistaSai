@@ -2,7 +2,7 @@
   "name": "venue-vista-react",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  
   "scripts": {
     "start": "nodemon server.js",
     "dev": "vite",
@@ -22,6 +22,7 @@
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.1",
     "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
@@ -42,5 +43,10 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.11"
-  }
+  },
+  "description": "This is our repository for the Web development Project we are creating in Sem5",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

@@ -16,7 +16,7 @@ const Venue_Reviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch('http://localhost:5000/reviews-main');
+        const response = await fetch('http://localhost:5001/reviews-main');
         if (!response.ok) {
           throw new Error('Failed to fetch reviews');
         }

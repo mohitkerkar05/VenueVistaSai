@@ -136,7 +136,7 @@ const sortVenues = () => {
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = '9321781042'; // Replace with the actual phone number
+    const phoneNumber = '8657659090'; // Replace with the actual phone number
     const message = 'Hello, I need assistance.'; // Replace with the default message
     const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 
@@ -144,7 +144,7 @@ const sortVenues = () => {
   };
 
   const handleEmailClick = () => {
-    const email = '2022.advik.hedge@ves.ac.in'; // Replace with the admin email
+    const email = '2022.sai.rane@ves.ac.in'; // Replace with the admin email
     const subject = 'Help Request'; // Default subject
     const body = 'Hello, I need assistance with...'; // Default message
 
@@ -166,7 +166,7 @@ const sortVenues = () => {
     setSuccess(false);
   
     try {
-      const response = await fetch(`http://localhost:5000/venues-from-cluster/${id}`);
+      const response = await fetch(`http://localhost:5001/venues-from-cluster/${id}`);
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
@@ -196,7 +196,7 @@ const sortVenues = () => {
   const handleReviewSubmit = async () => {
     if (text.trim() && rating && venueData) {
       try {
-        const response = await fetch("http://localhost:5000/addReview-to-cluster", {
+        const response = await fetch("http://localhost:5001/addReview-to-cluster", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -254,7 +254,7 @@ const sortVenues = () => {
     useEffect(() => {
       const fetchReviews = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/reviews-from-cluster/${venueId}`);
+          const response = await fetch(`http://localhost:5001/reviews-from-cluster/${venueId}`);
           const data = await response.json();
           setReviews(data); // Set fetched reviews to state
           setSortedReviews(data); // Set default reviews (before sorting)
@@ -385,7 +385,7 @@ const sortByRating = (reviews) => {
 
   const fetchAllVenues = async () => {
     try {
-      const response = await fetch('http://localhost:5000/venues-from-cluster'); // Fetch all venues
+      const response = await fetch('http://localhost:5001/venues-from-cluster'); // Fetch all venues
       if (!response.ok) {
         throw new Error(`Error fetching venues (Error ${response.status})`);
       }
@@ -488,7 +488,7 @@ useEffect(() => {
     };
     setBookingDetails(bookingDetails);
     try {
-      const response = await fetch('http://localhost:5000/api/bookings', {
+      const response = await fetch('http://localhost:5001/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

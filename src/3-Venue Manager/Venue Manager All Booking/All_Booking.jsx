@@ -13,7 +13,7 @@ const All_Booking = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await fetch('http://localhost:5000/bookings-main');
+        const response = await fetch('http://localhost:5001/bookings-main');
         if (!response.ok) {
           throw new Error('Failed to fetch bookings');
         }

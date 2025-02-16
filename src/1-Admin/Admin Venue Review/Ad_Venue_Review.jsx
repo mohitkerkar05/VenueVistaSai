@@ -22,7 +22,7 @@ const Ad_Venue_Review = () => {
   // Fetch venue details based on the selected venue ID
   const fetchVenueDetails = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/venues/${id}`);
+      const response = await fetch(`http://localhost:5001/api/venues/${id}`);
       if (!response.ok) {
         throw new Error(`Venue not found (Error ${response.status})`);
       }
@@ -106,7 +106,7 @@ const Ad_Venue_Review = () => {
     useEffect(() => {
       const fetchReviews = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/reviews/${venueId}`);
+          const response = await fetch(`http://localhost:5001/reviews/${venueId}`);
           const data = await response.json();
           setReviews(data); // Set fetched reviews to state
         } catch (error) {

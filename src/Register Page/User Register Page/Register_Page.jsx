@@ -24,7 +24,7 @@ function RegisterPage() {
     const userData = { username, email, name, password ,contactnumber};
 
     try {
-      const response = await fetch('http://localhost:5000/api/register-user', {
+      const response = await fetch('http://localhost:5001/api/register-user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

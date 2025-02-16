@@ -1,12 +1,10 @@
 const express = require('express');
-const { MongoClient , ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-
-
 
 const multer = require('multer');  // Import multer
 const path = require('path');      // Import path
@@ -15,7 +13,7 @@ const app = express();
 const moment = require('moment');
 
 // const port = 5000;
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Serve static images from the correct folder
 app.use('/images', express.static(path.join(__dirname, '../src/images')));
@@ -25,23 +23,23 @@ app.use('/images', express.static(path.join(__dirname, '../src/images')));
 app.use(cors()); // Allow cross-origin requests
 app.use(express.json()); // Parse JSON bodies
 
-// MongoDB connection URL and Database
-const url = 'mongodb://localhost:27017'; // Your MongoDB URL
-const dbName = 'TEST'; // Your database name
+// MongoDB Atlas connection string
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://<username>:<password>@cluster0.mongodb.net/TEST?retryWrites=true&w=majority'; 
+
 let db;
 
 // Optional root route to prevent "Cannot GET /"
-app.get('/', (req, res) => {
-  res.send('Welcome to the API! Use /api/documents to fetch documents.');
-});
+// app.get('/', (req, res) => {
+//   res.send('Welcome to the API! Use /api/documents to fetch documents.');
+// });
 
-// Connect to MongoDB using native driver
-MongoClient.connect(url)
+// Connect to MongoDB Atlas using the native MongoClient
+MongoClient.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((client) => {
-    db = client.db(dbName);
-    console.log(`Connected to database: ${dbName}`);
+    db = client.db('TEST'); // Ensure that the database name matches
+    console.log('Connected to MongoDB Atlas database: TEST');
   })
-  .catch((err) => console.error('Error connecting to MongoDB:', err));
+  .catch((err) => console.error('Error connecting to MongoDB Atlas:', err));
 
 // API Route to get documents from a collection
 app.get('/api/documents', async (req, res) => {
@@ -79,11 +77,9 @@ app.get('/api/getallusers', async (req, res) => {
 });
 
 // Connect to MongoDB with Mongoose for reviews
-mongoose.connect('mongodb://localhost:27017/TEST')
-  .then(() => console.log('Mongoose connected to MongoDB'))
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Mongoose connected to MongoDB Atlas'))
   .catch((err) => console.error('Mongoose connection error:', err));
-
-
 
 const fs = require('fs');
 

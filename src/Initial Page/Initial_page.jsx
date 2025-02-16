@@ -109,7 +109,7 @@ function Initial_page() {
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = '9321781042'; // Replace with the actual phone number
+    const phoneNumber = '8657659090'; // Replace with the actual phone number
     const message = 'Hello, I need assistance.'; // Replace with the default message
     const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 
@@ -117,7 +117,7 @@ function Initial_page() {
   };
 
   const handleEmailClick = () => {
-    const email = '2022.advik.hedge@ves.ac.in'; // Replace with the admin email
+    const email = '2022.sai.rane@ves.ac.in'; // Replace with the admin email
     const subject = 'Help Request'; // Default subject
     const body = 'Hello, I need assistance with...'; // Default message
 
@@ -135,7 +135,7 @@ function Initial_page() {
   // Fetch venue details based on the selected venue ID
   const fetchVenueDetails = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/venues/${id}`);
+      const response = await fetch(`http://localhost:5001/api/venues/${id}`);
       if (!response.ok) {
         throw new Error(`Venue not found (Error ${response.status})`);
       }
@@ -151,7 +151,7 @@ function Initial_page() {
   const handleReviewSubmit = async () => {
     if (text.trim() && rating && venueData) {
       try {
-        const response = await fetch("http://localhost:5000/api/addReview", {
+        const response = await fetch("http://localhost:5001/api/addReview", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -209,7 +209,7 @@ function Initial_page() {
     useEffect(() => {
       const fetchReviews = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/reviews/${venueId}`);
+          const response = await fetch(`http://localhost:5001/reviews/${venueId}`);
           const data = await response.json();
           setReviews(data); // Set fetched reviews to state
           setSortedReviews(data); // Set default reviews (before sorting)
@@ -300,7 +300,7 @@ function Initial_page() {
 
   const fetchAllVenues = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/venues'); // Fetch all venues
+      const response = await fetch('http://localhost:5001/api/venues'); // Fetch all venues
       if (!response.ok) {
         throw new Error(`Error fetching venues (Error ${response.status})`);
       }
@@ -383,7 +383,7 @@ function Initial_page() {
     };
     setBookingDetails(bookingDetails);
     try {
-      const response = await fetch('http://localhost:5000/api/bookings', {
+      const response = await fetch('http://localhost:5001/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

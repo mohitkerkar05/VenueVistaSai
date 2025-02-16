@@ -10,7 +10,7 @@ function Contact_Admin() {
 
   const handleWhatsAppClick = () => {
     console.log('hello');
-    const phoneNumber = '9321781042'; // Replace with the actual phone number
+    const phoneNumber = '8657659090'; // Replace with the actual phone number
     const message = 'Hello, I need assistance.'; // Replace with the default message
     const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 
@@ -18,7 +18,7 @@ function Contact_Admin() {
   };
 
   const handleEmailClick = () => {
-    const email = '2022.advik.hedge@ves.ac.in'; // Replace with the admin email
+    const email = '2022.sai.rane@ves.ac.in'; // Replace with the admin email
     const subject = 'Help Request'; // Default subject
     const body = 'Hello, I need assistance with...'; // Default message
 

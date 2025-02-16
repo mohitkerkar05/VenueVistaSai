@@ -22,9 +22,9 @@ function LoginPage() {
 
     const loginData = { username, password };
     const loginUrl =
-      entity === 'A' ? 'http://localhost:5000/api/user-login' :
-      // entity === 'B' ? 'http://localhost:5000/api/admin-login' :
-      'http://localhost:5000/api/manager-login';
+      entity === 'A' ? 'http://localhost:5001/api/user-login' :
+       entity === 'B' ? 'http://localhost:5001/api/admin-login' :
+      'http://localhost:5001/api/manager-login';
 
     try {
       setLoading(true);

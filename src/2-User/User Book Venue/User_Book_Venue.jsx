@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import person1 from '../User Home page/person1.jpeg';
 import person3 from '../User Home page/person3.jpeg';
 import './User_Book_Venue.css';
-
+import whatsapp from '../User Contact Admin/whatsapp.png';
+import gmail from '../User Contact Admin/gmail.png';
+import contactadmin from '../User Home Page/customer.png';
 const BookingForm = () => {
   // State to manage form input values
   const [formData, setFormData] = useState({
@@ -42,7 +44,7 @@ const BookingForm = () => {
     setBookingDetails(formData);
 
     try {
-      const response = await fetch('http://localhost:5000/bookings-new-to-cluster', {
+      const response = await fetch('http://localhost:5001/bookings-new-to-cluster', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,6 +62,9 @@ const BookingForm = () => {
 
   const renderReceipt = () => {
     if (!bookingDetails) return null;
+
+  
+  
 
     return (
       <div className="booking-receipt">
@@ -230,7 +235,10 @@ const BookingForm = () => {
             <p>Event Planner</p>
           </div>
         </div>
+
       </section>
+
+      
 
       <div className="checkbox-container">
         <input type="checkbox" id="assist-checkbox" onChange={handleCheckboxChange} />

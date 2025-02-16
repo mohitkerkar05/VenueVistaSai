@@ -1,11 +1,4 @@
-/* General Reset */
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
-
-/* Body Styling */
+/* 
 
 .my-details-container{
     top:50%;
@@ -15,4 +8,183 @@
     display:none;
     position:fixed;
     background-color:gray;
-  }
+  } */
+
+  /* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.form-container {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-elements-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+/* Continue from where it left off */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button.submit-btn {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.submit-btn:hover {
+  background-color: #218838;
+}
+
+/* Booking Receipt Styling */
+.booking-receipt {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.booking-receipt h2 {
+  color: #4caf50;
+}
+
+.booking-receipt p {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* Venue Coordinator Section */
+.coordinator-section {
+  text-align: center;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ddd;
+}
+
+.coordinator-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.coordinator-card {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.coordinator-image {
+  width: 100%;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.coordinator-card h3 {
+  color: #333;
+  margin: 10px 0 5px;
+}
+
+.coordinator-card p {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Contact Admin Section */
+.contact-admin {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px;
+  justify-content: center;
+}
+
+.contact-admin img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.contact-admin img:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-icon {
+  margin-right: 5px;
+}
+
+.gmail-icon {
+  margin-left: 5px;
+}
+
+/* Additional Charge Note */
+.additional-charge {
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #ffeb3b;
+  border: 1px solid #fbc02d;
+  color: #856404;
+  border-radius: 4px;
+  max-width: 600px;
+  text-align: center;
+}
+

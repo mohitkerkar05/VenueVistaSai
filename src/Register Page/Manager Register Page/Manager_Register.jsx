@@ -27,7 +27,7 @@ const RegisterManager = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/register-manager', {
+      const response = await axios.post('http://localhost:5001/api/register-manager', {
         name: managerName,
         email,
         contactNumber,

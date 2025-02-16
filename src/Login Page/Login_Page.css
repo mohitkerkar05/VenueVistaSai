@@ -1,78 +1,125 @@
-/* Styles specific to the login page container */
-/* Styles specific to the login page container */
+/* Container Styles */
 .login-container-div {
     padding: 20px;
-    background-color: #f4f4f4;
-    border: 1px black solid;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
     border-radius: 10px;
-    width: 90%; /* Adjusted for better responsiveness */
-    max-width: 400px; /* Set a maximum width */
-    height: auto; /* Adjust height based on content */
+    width: 90%;
+    max-width: 400px;
     margin: auto;
+    position: fixed;
     top: 50%;
     left: 50%;
-    position: fixed;
     transform: translate(-50%, -50%);
     z-index: 10;
-    /* Display property will be controlled via React state */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for modern look */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.login-container-div:hover {
+    transform: translate(-50%, -48%);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Slight hover animation */
+}
 
-/* Styles for the login form */
+/* Form Title */
 .form-title {
     text-align: center;
+    font-size: 22px;
+    font-weight: bold;
     margin-bottom: 20px;
+    color: #333;
 }
 
+/* Form Group Styles */
 .form-group {
     margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
 }
 
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
+    font-size: 14px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Focus state styling */
+}
+
+/* Button Styles */
 .form-group button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     background-color: #007bff;
-    color: white;
+    color: #fff;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .form-group button:hover {
     background-color: #0056b3;
+    transform: scale(1.02); /* Subtle hover effect */
 }
 
+.form-group button:active {
+    transform: scale(0.98);
+    background-color: #003d7a; /* Slightly darker for active state */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Footer */
 .form-footer {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
 }
 
 .form-footer a {
     color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .form-footer a:hover {
     text-decoration: underline;
+    color: #0056b3;
 }
 
-/* Media queries for responsive design */
+/* Responsive Design */
 @media (max-width: 600px) {
     .login-container-div {
-        width: 95%; /* Adjust width for smaller screens */
+        width: 95%;
         padding: 15px;
+    }
+
+    .form-title {
+        font-size: 20px;
+    }
+
+    .form-group button {
+        font-size: 14px;
+        padding: 10px;
     }
 }

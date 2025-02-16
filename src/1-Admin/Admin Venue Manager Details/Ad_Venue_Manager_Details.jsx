@@ -457,7 +457,7 @@ const Ad_Venue_Manager_Details = () => {
     useEffect(() => {
         const fetchManagers = async () => {
             try {
-                const response = await fetch('http://localhost:5000/managers');
+                const response = await fetch('http://localhost:5001/managers');
                 if (!response.ok) {
                     throw new Error('Failed to fetch managers');
                 }
@@ -480,7 +480,7 @@ const Ad_Venue_Manager_Details = () => {
 
         // Fetch venue details based on the venueName from the user
         try {
-            const response = await fetch(`http://localhost:5000/venue/venueName/${user.venueName}`);
+            const response = await fetch(`http://localhost:5001/venue/venueName/${user.venueName}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch venue details');
             }
